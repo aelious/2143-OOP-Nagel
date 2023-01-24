@@ -1,15 +1,15 @@
-## A03 - Banner
+## A03 - Commenting Code
 ### Stephanie Nagel
 ### Description:
 
-Converted name to a banner in Big Money-ne font using Banner Comments+.
+This program implements a list data structure that links together nodes of integers. 
 
 ### Files
 
 |   #   | File            | Description                                        |
 | :---: | --------------- | -------------------------------------------------- |
-|   1   |   |  |
-|   2   | [banner.txt](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/A03/banner.txt) | Contains Project Banner |
+|   1   | [main.cpp]()  | Main driver of my list program. |
+|   2   | [banner.txt](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/A03/banner.txt) | Project Banner |
 
 ### Instructions
 
