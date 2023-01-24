@@ -17,7 +17,9 @@
 *
 *       C.Pop();                               // Removes the first index in C
 *
-*       C.Push(11);                            // Appends 11 to the end of the queue.
+*       for (int i = 0; i < 15; i++) {         // Appends ints 0 - 14 to the queue.
+*           C.Push(i);
+*       }
 *
 *       C.Push(12);                            // Attempts to append 12 after the rear,
 *                                              // but is unable to as the queue is full.
