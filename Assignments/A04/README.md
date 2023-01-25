@@ -2,13 +2,13 @@
 ### Stephanie Nagel
 ### Description:
 
-This is a wiki intended to provide easy-to-digest information about some terms and concepts you'll find in OOP.
+This is a primer intended to provide easy-to-digest information about some terms and concepts you'll find in OOP.
 
 ### Files
 
 |   #   | File            | Description                                        |
 | :---: | --------------- | -------------------------------------------------- |
-|     |   | This will be filled in later :-) |
+|  1   | [Wiki](https://github.com/aelious/2143-OOP-Nagel/wiki)  | OOP primer for different concepts. |
 
 
 ### Topics Explained Include:
