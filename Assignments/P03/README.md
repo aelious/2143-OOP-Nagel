@@ -9,3 +9,4 @@ Implements a class that generates graphviz graphics in conjunction with associat
 |   #   | File            | Description                                        |
 | :---: | --------------- | -------------------------------------------------- |
 |       |                 |                                                    |
+|   2    |       [banner.txt](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/P03/banner.txt)          |      Project Banner   |
