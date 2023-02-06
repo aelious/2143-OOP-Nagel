@@ -9,5 +9,4 @@ Implement a linked list based vector class with various functionality, such as a
 |   #   | File            | Description                                        |
 | :---: | --------------- | -------------------------------------------------- |
 |   1  |   |  |
-|   2  |   |  |
-|   3  | [banner.txt](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/P01/banner.txt)  | Project Banner |
+|   2  | [banner.txt](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/P01/banner.txt)  | Project Banner |
