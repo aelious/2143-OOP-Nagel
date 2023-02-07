@@ -105,7 +105,7 @@ struct Node {
  *      
  *      myVector.sortList();                        // Sorts the nodes in the linked list.
  *      myVector.print();                           // Logs & outfiles[1, 1, 2, 2, 3, 3, 4]
- *      myCopiedVector.print();                     // Logs & outfiles [1, 2, 3]
+ *      myCopiedVector.print();                     // Logs & outfiles [3, 2, 1]
  */
 
 class Vector {
