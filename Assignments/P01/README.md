@@ -2,7 +2,7 @@
 ### Stephanie Nagel
 ### Description:
 
-Implement a linked list based vector class with various functionality, such as adding, removing, and printing items in the container. Extended in [Part 2](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/P02)
+Implement a linked list based vector class with various functionality, such as adding, removing, and printing items in the container. Extended in [Part 2](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/P02).
 
 ### Files
 
