@@ -8,5 +8,7 @@ Extends upon [Vector Class](https://github.com/aelious/2143-OOP-Nagel/tree/main/
 
 |   #   | File            | Description                                        |
 | :---: | --------------- | -------------------------------------------------- |
-|   1    |                 |                                                    |
-|   2    |       [banner.txt](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/P02/banner.txt)          |      Project Banner   |
+|   1    |      [main.cpp](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/P02/main.cpp)          |  Main driver of the program                                                  |
+|   2    |      [vector.hpp](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/P02/vector.hpp)        | Header file with vector and node definitions |
+|   3    |      [output.txt](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/P02/output.txt)         |  Output for tests in main.cpp                      |
+|   4    |       [banner.txt](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/P02/banner.txt)          |      Project Banner   |
