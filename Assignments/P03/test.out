@@ -1,0 +1,38 @@
+Stephanie Nagel
+February 27, 2023
+Spring 2143
+
+digraph Graphviz {
+	rankdir=LR
+	bgcolor="black:purple"
+	label="Linked List"
+	fontcolor=white
+	node [fontcolor=black, style=filled, tailclip=true, fixedsize=true];
+	null [shape=circle, style=filled, color="yellow:red"];
+	1 [label="5", shape=doublecircle, color="deeppink3:pink"];
+	2 [label="7", shape=star, color="darkgoldenrod3:gold"];
+	3 [label="9", shape=star, color="darkgoldenrod3:gold"];
+	4 [label="2", shape=record, color="cornflowerblue:blue4"];
+	1 -> 2:data [arrowhead=vee, arrowtail=dot, dir=forward, color="deeppink", tailclip=true];
+	2 -> 3:data [arrowhead=normal, arrowtail=normal, dir=both, color="mediumspringgreen:skyblue1", tailclip=true];
+	3 -> 4:data [arrowhead=none, arrowtail=dot, dir=none, color="mediumorchid1", tailclip=true, style=dashed];
+	4 -> null [arrowhead=inv, arrowtail=inv, dir=forward, tailclip=true, style=dotted, color=blue4];
+}
+
+digraph Graphviz {
+	rankdir=LR
+	bgcolor="black:purple"
+	label="Linked List"
+	fontcolor=white
+	node [fontcolor=black, style=filled, tailclip=true, fixedsize=true];
+	null [shape=circle, style=filled, color="yellow:red"];
+	1 [label="5", shape=record, color="cornflowerblue:blue4"];
+	2 [label="29", shape=star, color="darkgoldenrod3:gold"];
+	3 [label="20", shape=doublecircle, color="deeppink3:pink"];
+	4 [label="15", shape=doublecircle, color="deeppink3:pink"];
+	1 -> 2:data [arrowhead=none, arrowtail=dot, dir=none, color="mediumorchid1", tailclip=true, style=dashed];
+	2 -> 3:data [arrowhead=vee, arrowtail=dot, dir=forward, color="deeppink", tailclip=true];
+	3 -> 4:data [arrowhead=none, arrowtail=dot, dir=none, color="mediumorchid1", tailclip=true, style=dashed];
+	4 -> null [arrowhead=inv, arrowtail=inv, dir=forward, tailclip=true, style=dotted, color=blue4];
+}
+
