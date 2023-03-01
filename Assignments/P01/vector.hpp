@@ -450,22 +450,19 @@ public:
      */
 
     int popRear() {
-        int removedData = -1;
-        // Skips this if the list is empty
-        if (tail != nullptr) {
-            removedData = tail->data;
-            Node *travel = front;
-            Node *checkNext = travel->next;
-            int removedData;
-            while (checkNext->next != nullptr) {
-                travel = travel->next;
-                checkNext = checkNext->next;
-                if (checkNext->next == nullptr) {
-                    tail = travel;
-                    delete checkNext;
-                    tail->next = nullptr;
-                }
+        // If list is empty, return -1
+        if(front == nullptr) {
+            return -1;
+        }
+        int removedData;
+        Node *travel = front;
+        while(travel) {
+            if((travel->next)->next == nullptr) {
+                removedData = (travel->next)->data;
+                travel->next = nullptr;
+                break;
             }
+            travel = travel->next;
         }
         return removedData;
     }
