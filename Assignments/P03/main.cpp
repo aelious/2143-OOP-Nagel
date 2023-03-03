@@ -23,35 +23,41 @@
 *       bst.hpp                 : header file with binary search tree & helper struct defns
 *       
 ********************************************************************************************/
-//main.cpp
+// main.cpp
 
+// Included libraries:
 #include "list.hpp"
 #include "bst.hpp"
 #include <iostream>
 #include <fstream>
 
-
+// Driver of the program
 int main() {
+    // Open output file
     ofstream outfile;
     outfile.open("test.out");
+    
+    // Print header for solution
     outfile << "Stephanie Nagel\nFebruary 27, 2023\nSpring 2143\n" << endl;
 
-    List L;
-    L.addNode(5);
+    List L;                 // Creates new linked list L
+    L.addNode(5);           // Adds a new node to L
     L.addNode(7);
     L.addNode(9);
     L.addNode(2);
     L.addNode(13);
     L.addNode(4);
-    L.addEdge(1, 2);
-    L.addEdge(4, 3);
+    L.addEdge(1, 2);        // Adds an explicit edge between the first and second node
+    L.addEdge(4, 3);        
     L.addEdge(3, 4);
     L.addEdge(6, 2);
-    L.printDOT();
+    L.printDOT();           // Prints the DOT notation of L so it can be visualized in
+                            // graphviz
 
-    BST B;
-    B.insert(8);
-    B.insert(3);
+    BST B;                  // Creates a new binary search tree B
+    B.insert(8);            // Adds a new node to B, set as the root of B, as it is the first
+                            // node in the tree.
+    B.insert(3);            // Adds a new node in the correct position in B
     B.insert(10);
     B.insert(1);
     B.insert(6);
@@ -59,6 +65,7 @@ int main() {
     B.insert(7);
     B.insert(14);
     B.insert(13);
-    B.printDOT();
-    return 0;
+    B.printDOT();           // Prints the DOT notation of B so it can be visualized in
+                            // graphviz
+    return 0;   
 }
