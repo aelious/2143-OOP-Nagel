@@ -70,8 +70,7 @@ struct Node {
  * Public Methods:
  *                          Vector()
  *                          Vector(int *A, int size)
- *                          Vector(string file)
- *                          Vector(&V2)
+ *                          Vector(const Vector &V2)
  *      void                inOrderPush(int x)
  *      void                pushFront(int x)
  *      void                pushFront(Vector V2)
