@@ -23,7 +23,7 @@
 *       bst.hpp                 : header file with binary search tree & helper struct defns
 *       
 ********************************************************************************************/
-//list.hpp
+// list.hpp
 
 // Included libraries:
 #include <vector>
@@ -31,6 +31,7 @@
 #include <map>
 #include <iostream>
 #include <fstream>
+
 // Namespace for the program:
 using namespace std;
 
@@ -47,21 +48,21 @@ string nullEdgeSettings = "null [arrowhead=inv, arrowtail=inv, dir=forward,"
     " tailclip=true, style=dotted, color=blue4];";
 
 /**
- * Node
+ * listNode
  * 
  * Description:
  *      This struct provides the structure for a node in our linked list.
  * 
  * Public Methods:
- *                          Node(int x, int _id)    // Constructor
+ *                          listNode(int x, int _id)// Constructor
  * 
  * Private Methods:
  *                          N/A
  * 
  * Usage: 
- *      Node *newNode = Node(x);                    // Creates a new node with data x
- *      newNode->next = nextNode;                   // Singly links the node newNode
- *                                                  // to the node nextNode
+ *      listNode newNode(x, _id);           // Creates a new node with data x and id of _id
+ *      newNode->next = nextNode;           // Singly links the node newNode to nextNode
+ *                                          
  */
 
 struct listNode {
@@ -79,29 +80,31 @@ struct listNode {
 };
 
 /**
- * Edge
+ * listEdge
  * 
  * Description:
  *      This struct provides the structure for an edge between nodes in our linked list.
  * 
  * Public Methods:
- *                          Node(int t)             // Constructor
+ *                          listEdge(int t)         // Constructor for an edge. Sets default
+ *                                                  // attributes and the ID that it's 
+ *                                                  // pointing to.
  *      string              print()                 // Returns the edge attributes as a string
+ *                                                  // in DOT notation.
  * 
  * Private Methods:
  *                          N/A
  * 
  * Usage: 
- *      nodeEdgeMap[idFm].push_back(Edge(idTo));        // Creates an edge between 2 ids, saved in
+ *      nodeEdgeMap[idFm].push_back(Edge(idTo));    // Creates an edge between 2 ids, saved in
  *                                                  // the vector value of our map of nodes in
  *                                                  // the Graphviz class below
- *      nodeEdgeMap[idFm][edgeIndex]->print();          // Returns the attributes in the edge
+ *      nodeEdgeMap[idFm][edgeIndex]->print();      // Returns the attributes in the edge
  */
 
 struct listEdge {
-    int idTo;
-    map<string, string> attributes;
-
+    int idTo;                       // ID that the edge is pointing to
+    map<string, string> attributes; // Map of edge attributes in DOT format.
     listEdge(int to) {
         idTo = to;
         attributes["dir"] = "none";
@@ -110,11 +113,14 @@ struct listEdge {
         attributes["color"] = "mediumorchid1";
     }
 
+    // Returns the edge attributes as a string in DOT notation:
+    // after "1 -> 2" format declaration: [edgeAttribute1=value, edgeAttribute2=value, etc];
     string print() {
         string result = "[";
         for (auto a : attributes) {
             result.append(a.first + "=" + a.second + ", ");
         }
+        // Adds a dashed style to the edge if it is a default edge.
         if (attributes["dir"] == "none") {
             result.append("style=dashed];");
         } else {
@@ -124,7 +130,6 @@ struct listEdge {
         } 
         return result;
     }
-
 };
 
 /**
