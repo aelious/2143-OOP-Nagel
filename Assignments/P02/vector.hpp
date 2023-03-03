@@ -162,33 +162,6 @@ public:
         }
     }
 
-     /**
-     * Public : Vector
-     * 
-     * Description:
-     *      Overloaded constructor used for creating a linked list with nodes using data in an
-     *      external input file. Opens the input file and reads in the node data. closes the 
-     *      input file when it is done reading in the data from it. Also opens output file and 
-     *      sets it to append mode.
-     * 
-     * Params:
-     *      string    : name of input file
-     * 
-     * Returns:
-     *      N/A
-     */
-
-    Vector(string file){
-        outfile.open("output.txt", ios::app);
-        front = tail = nullptr;
-        infile.open(file);
-        while (!infile.eof()) {
-            int tempVal;
-            infile >> tempVal;
-            pushRear(tempVal);
-        }
-        infile.close();
-    }
 
     /**
      * Public : Vector
@@ -205,7 +178,7 @@ public:
      *      N/A
      */
 
-    Vector(Vector &V2){   
+    Vector(const Vector &V2){   
         outfile.open("output.txt", ios::app);
         front = tail = nullptr;
         // Does nothing if V2 is empty
