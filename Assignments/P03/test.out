@@ -14,38 +14,13 @@ digraph LinkedList {
 	3 [label="9", shape=star, color="darkgoldenrod3:gold"];
 	4 [label="2", shape=record, color="cornflowerblue:blue4"];
 	5 [label="13", shape=star, color="darkgoldenrod3:gold"];
-	6 [label="8", shape=doublecircle, color="deeppink3:pink"];
-	7 [label="12", shape=star, color="darkgoldenrod3:gold"];
-	8 [label="4", shape=record, color="cornflowerblue:blue4"];
-	1:e -> 2:w [arrowhead=vee, arrowtail=dot, color=cyan, direction=forward];
-	1:e -> 3:w [arrowhead=vee, arrowtail=dot, color=cyan, direction=forward];
-	2:e -> 3:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, direction=none, style=dashed];
-	2:e -> 4:w [arrowhead=vee, arrowtail=dot, color=cyan, direction=forward];
-	2:e -> 5:w [arrowhead=vee, arrowtail=dot, color=cyan, direction=forward];
-	3:e -> 4:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, direction=none, style=dashed];
-	3:e -> 6:w [arrowhead=vee, arrowtail=dot, color=cyan, direction=forward];
-	3:e -> 7:w [arrowhead=vee, arrowtail=dot, color=cyan, direction=forward];
-	4:e -> 5:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, direction=none, style=dashed];
-	5:e -> 6:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, direction=none, style=dashed];
-	6:e -> 7:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, direction=none, style=dashed];
-	7:e -> 8:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, direction=none, style=dashed];
-	8 -> null [arrowhead=inv, arrowtail=inv, dir=forward, tailclip=true, style=dotted, color=blue4];
-}
-
-digraph LinkedList {
-	rankdir=LR
-	bgcolor="black:purple"
-	label="Linked List"
-	fontcolor=white
-	node [fontcolor=black, style=filled, tailclip=true, fixedsize=true];
-	null [shape=circle, style=filled, color="yellow:red"];
-	1 [label="5", shape=record, color="cornflowerblue:blue4"];
-	2 [label="29", shape=star, color="darkgoldenrod3:gold"];
-	3 [label="20", shape=doublecircle, color="deeppink3:pink"];
-	4 [label="15", shape=doublecircle, color="deeppink3:pink"];
-	1:e -> 2:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, direction=none, style=dashed];
-	2:e -> 3:w [arrowhead=vee, arrowtail=dot, color=cyan, direction=forward];
-	3:e -> 4:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, direction=none, style=dashed];
-	4 -> null [arrowhead=inv, arrowtail=inv, dir=forward, tailclip=true, style=dotted, color=blue4];
+	6 [label="4", shape=record, color="cornflowerblue:blue4"];
+	1:e -> 2:w[arrowhead=vee, arrowtail=dot, color=cyan, dir=forward];
+	2:e -> 3:w[arrowhead=none, arrowtail=dot, color=mediumorchid1, dir=none, style=dashed];
+	2:e -> 6:w[arrowhead=none, arrowtail=vee, color=deeppink, dir=back];
+	3:e -> 4:w[arrowhead=normal, arrowtail=normal, color="mediumspringgreen:coral1", dir=both];
+	4:e -> 5:w[arrowhead=vee, arrowtail=vee, color=deeppink, dir=back];
+	5:e -> 6:w[arrowhead=none, arrowtail=dot, color=mediumorchid1, dir=none, style=dashed];
+	6 -> null [arrowhead=inv, arrowtail=inv, dir=forward, tailclip=true, style=dotted, color=blue4];
 }
 

@@ -104,7 +104,7 @@ struct listEdge {
 
     listEdge(int to) {
         idTo = to;
-        attributes["direction"] = "none";
+        attributes["dir"] = "none";
         attributes["arrowhead"] = "none";
         attributes["arrowtail"] = "dot";
         attributes["color"] = "mediumorchid1";
@@ -115,7 +115,7 @@ struct listEdge {
         for (auto a : attributes) {
             result.append(a.first + "=" + a.second + ", ");
         }
-        if (attributes["direction"] == "none") {
+        if (attributes["dir"] == "none") {
             result.append("style=dashed];");
         } else {
             result.pop_back();
@@ -262,8 +262,8 @@ public:
             int tempIndex = findEdgeIndex(fm, to);
             if (!foundEdge(to, fm)) {
                 // If the found edge is the default edge and it's one-way:
-                if (nodeEdgeMap[fm][tempIndex]->attributes["direction"] == "none") {
-                    nodeEdgeMap[fm][tempIndex]->attributes["direction"] = "forward";
+                if (nodeEdgeMap[fm][tempIndex]->attributes["dir"] == "none") {
+                    nodeEdgeMap[fm][tempIndex]->attributes["dir"] = "forward";
                     nodeEdgeMap[fm][tempIndex]->attributes["arrowhead"] = "vee";
                     if(fm > to) {
                         nodeEdgeMap[fm][tempIndex]->attributes["color"] = "deeppink";
@@ -271,6 +271,15 @@ public:
                         nodeEdgeMap[fm][tempIndex]->attributes["color"] = "cyan";
                     }
                     return;
+                }
+                // If the found edge is the edge of a higher id pointing to the lower id,
+                // make the edge bidirectional.
+                else if (nodeEdgeMap[fm][tempIndex]->attributes["dir"] == "back"){
+                    nodeEdgeMap[fm][tempIndex]->attributes["dir"] = "both";
+                    nodeEdgeMap[fm][tempIndex]->attributes["arrowtail"] = "normal";
+                    nodeEdgeMap[fm][tempIndex]->attributes["arrowhead"] = "normal";
+                    nodeEdgeMap[fm][tempIndex]->attributes["color"] = "\"mediumspringgreen"
+                    ":coral1\"";
                 } else {
                     cout << "Edge already exists!\n";
                     return;
@@ -281,18 +290,18 @@ public:
                 // The lower id index keeps the edge and sets the direction to both
                 // while the other edge of the higher id is deleted.
                 if (fm < to) {
-                    nodeEdgeMap[fm][tempIndex]->attributes["direction"] = "both";
+                    nodeEdgeMap[fm][tempIndex]->attributes["dir"] = "both";
                     nodeEdgeMap[fm][tempIndex]->attributes["arrowtail"] = "normal";
                     nodeEdgeMap[fm][tempIndex]->attributes["arrowhead"] = "normal";
-                    nodeEdgeMap[fm][tempIndex]->attributes["color"] = "mediumspringgreen"
-                    ":coral1";
+                    nodeEdgeMap[fm][tempIndex]->attributes["color"] = "\"mediumspringgreen"
+                    ":coral1\"";
                     removeEdge(to, fm);
                 } else {
-                    nodeEdgeMap[to][otherIndex]->attributes["direction"] = "both";
+                    nodeEdgeMap[to][otherIndex]->attributes["dir"] = "both";
                     nodeEdgeMap[to][otherIndex]->attributes["arrowtail"] = "normal";
                     nodeEdgeMap[to][otherIndex]->attributes["arrowhead"] = "normal";
-                    nodeEdgeMap[to][otherIndex]->attributes["color"] = "mediumspringgreen"
-                    ":coral1";
+                    nodeEdgeMap[to][otherIndex]->attributes["color"] = "\"mediumspringgreen"
+                    ":coral1\"";
                     removeEdge(fm, to);
                 }
             }
@@ -300,43 +309,53 @@ public:
         } else {
             // If no edge is found between either node:
             if (!foundEdge(to, fm)) {
-                listEdge *e = new listEdge(to);
-                e->attributes["direction"] = "forward";
-                e->attributes["arrowhead"] = "vee";
                 // Assign a different color based on if the node points forward or backward
                 // in id (If 2 points to 1, the color will be deeppink, otherwise it's cyan)
                 if (fm > to) {
+                    listEdge *e = new listEdge(fm);
                     e->attributes["color"] = "deeppink";
-                } else e->attributes["color"] = "cyan";
-                nodeEdgeMap[fm].push_back(e);
-            } else {
+                    e->attributes["dir"] = "back";
+                    e->attributes["arrowtail"] = "vee";
+                    nodeEdgeMap[to].push_back(e);
+                } else {
+                    listEdge *e = new listEdge(to);
+                    e->attributes["arrowhead"] = "vee";
+                    e->attributes["color"] = "cyan";
+                    e->attributes["dir"] = "forward";
+                    nodeEdgeMap[fm].push_back(e);
+                }
+            } 
+            
+            else {
                 int otherIndex = findEdgeIndex(to, fm);
-                if (nodeEdgeMap[to][otherIndex]->attributes["direction"] == "both") {
+                if (nodeEdgeMap[to][otherIndex]->attributes["dir"] == "both") {
                     cout << "Edge already exists!\n";
                     return;
-                } else if (nodeEdgeMap[to][otherIndex]->attributes["direction"] == "none") {
-                    listEdge *e = new listEdge(to);
-                    e->attributes["direction"] = "forward";
-                    e->attributes["arrowtail"] = "vee";
-                    e->attributes["arrowhead"] = "vee";
-                    e->attributes["color"] = "deeppink";
-                    nodeEdgeMap[fm].push_back(e);
-                    removeEdge(to, fm);
                 }
+                // If the found edge between the to index ID is the default edge, it can be
+                // assumed that it is the smaller ID of the two, so the values are set
+                // accordingly.
+                else if (nodeEdgeMap[to][otherIndex]->attributes["dir"] == "none") {
+                    nodeEdgeMap[to][otherIndex]->attributes["dir"] = "back";
+                    nodeEdgeMap[to][otherIndex]->attributes["arrowtail"] = "vee";
+                    nodeEdgeMap[to][otherIndex]->attributes["arrowhead"] = "vee";
+                    nodeEdgeMap[to][otherIndex]->attributes["color"] = "deeppink"; 
+                }
+                // If the node to be created doesn't exist but the other 
                 else {
                     if (fm < to) {
                         listEdge *e = new listEdge(to);
-                        e->attributes["direction"] = "both";
+                        e->attributes["dir"] = "both";
                         e->attributes["arrowhead"] = "normal";
                         e->attributes["arrowtail"] = "normal";
-                        e->attributes["color"] = "mediumspringgreen:coral1";
+                        e->attributes["color"] = "\"mediumspringgreen:coral1\"";
                         removeEdge(to, fm);
                     } else {
-                        nodeEdgeMap[to][otherIndex]->attributes["direction"] = "both";
+                        nodeEdgeMap[to][otherIndex]->attributes["dir"] = "both";
                         nodeEdgeMap[to][otherIndex]->attributes["arrowtail"] = "normal";
                         nodeEdgeMap[to][otherIndex]->attributes["arrowhead"] = "normal";
-                        nodeEdgeMap[to][otherIndex]->attributes["color"] = "mediumspringgreen"
-                        ":coral1";
+                        nodeEdgeMap[to][otherIndex]->attributes["color"] = "\"mediumspring"
+                        "green:coral1\"";
                     }
                 }
             }
@@ -431,8 +450,11 @@ public:
         string result = "";
         for (int i = 0; i < nodeEdgeMap[id].size(); i++) {
             // idFrom -> idTo:data [edgeSettings];
-            result.append("\n\t" + to_string(id) + ":e -> " + to_string(nodeEdgeMap[id][i]->idTo));
-            result.append(":w " + nodeEdgeMap[id][i]->print());
+            result.append("\n\t" + to_string(id));
+            id < nodeEdgeMap[id][i]->idTo ? result.append(":e -> ") : result.append(":w -> ");
+            result.append(to_string(nodeEdgeMap[id][i]->idTo));
+            id < nodeEdgeMap[id][i]->idTo ? result.append(":w") : result.append(":e");
+            result.append(nodeEdgeMap[id][i]->print());
             // If it's the last node, append null edge and settings at the end
             if (id == curr_id) {
                 result.append(("\n\t" + to_string(id) + " -> " + nullEdgeSettings));

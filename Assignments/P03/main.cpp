@@ -12,7 +12,7 @@
 *       can accept new nodes and can be rendered digitally by generating the "DOT" language 
 *       syntax. It can then be visualized via Graphviz compilers. The nodes and edges change
 *       attributes based on the value of the data in the node and the direction of the arrows
-*       in the edge.
+*       in the edge. 
 *
 *  Usage:
 *       N/A
@@ -42,32 +42,23 @@ int main() {
     L.addNode(9);
     L.addNode(2);
     L.addNode(13);
-    L.addNode(8);
-    L.addNode(12);
     L.addNode(4);
     L.addEdge(1, 2);
-    L.addEdge(1, 3);
-    L.addEdge(2, 4);
-    L.addEdge(2, 5);
-    L.addEdge(3, 6);
-    L.addEdge(3, 7);
-
+    L.addEdge(4, 3);
+    L.addEdge(3, 4);
+    L.addEdge(6, 2);
     L.printDOT();
 
-    List N;
-    N.addNode(5);
-    N.addNode(29);
-    N.addNode(20);
-    N.addNode(15);
-    N.addEdge(2, 3);
-    N.printDOT();
-
-    BST G;
-    G.insert(2);
-    G.insert(12);
-    G.insert(5);
-    G.insert(4);
-    G.insert(3);
-    G.print();
+    BST B;
+    B.insert(8);
+    B.insert(3);
+    B.insert(10);
+    B.insert(1);
+    B.insert(6);
+    B.insert(4);
+    B.insert(7);
+    B.insert(14);
+    B.insert(13);
+    B.printDOT();
     return 0;
 }

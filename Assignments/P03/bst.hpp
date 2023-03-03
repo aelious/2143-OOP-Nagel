@@ -30,8 +30,8 @@
 using namespace std;
 
 string bgSettingsBST = "digraph BST {\n\tbgcolor=\"deeppink:cyan\"\n\tlabel=\"BST\"\n\t"
-    "fontcolor=white\n\tnode [fontcolor=black, style=filled, tailclip=true, fixedsize=true];"
-    "\n\t";
+    "fontcolor=white\n\tnode [fontcolor=black, style=filled, tailclip=true, shape=record"
+    ", fixedsize=true];\n\t";
 
 struct bstNode {
     int data;
@@ -49,15 +49,16 @@ struct bstNode {
         if (id != 1) {
             cout << "\n\t";
         }
-        cout << id << " [label=\"" << data << "\"];";
+        cout << id << " [label=\"{<data> " << data << " | {<left> | <right>}}\"];";
+        //cout << id << " [label=\"" << data << "\"];";
     }
     void printConnections() {
         string result = "";
         if (left) {
-            result.append("\n\t" + to_string(id) + " -> " + to_string(left->id) + ";");
+            result.append("\n\t" + to_string(id) + ":left -> " + to_string(left->id) + ";");
         }
         if (right) {
-            result.append("\n\t" + to_string(id) + " -> " + to_string(right->id) + ";");
+            result.append("\n\t" + to_string(id) + ":right -> " + to_string(right->id) + ";");
         }
         cout << result;
     }
@@ -74,7 +75,6 @@ private:
 
     bstNode *insert(bstNode *node, int data) {
         if (node == NULL) {
-            cout << "new node wee woo " << data << endl;
             node = new bstNode();
             node->data = data;
             node->id = curr_id;
@@ -82,13 +82,10 @@ private:
             node->left = NULL;
             node->right = NULL;
         } else if (data <= node->data) {
-            cout << data << " <= " << node->data << endl;
             node->left = insert(node->left, data);
         } else {
-            cout << data << " > " << node->data << endl;
             node->right = insert(node->right, data);
         }
-        
         return node;
     }
 
@@ -125,9 +122,9 @@ public:
         root = insert(root, data); 
     }
 
-    void print() {
+    void printDOT() {
         cout << bgSettingsBST;
         print(root);
-        cout << "}";
+        cout << "\n}\n";
     }
 };
