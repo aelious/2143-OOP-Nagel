@@ -66,29 +66,27 @@ string bgSettingsBST = "digraph BST {\n\tbgcolor=\"deeppink:cyan\"\n\tlabel=\"BS
 struct bstNode {
     int data;               // integer data contained in the node
     int id;                 // ID of the node
-    ofstream outfile;       // file to output our results to
     bstNode *left;          // left child node
     bstNode *right;         // right child node
 
     // Default constructor. Not meant to be used really, but designed to initialize left and
     // right to NULL to prevent potential errors upon usage.
     bstNode() {
-        outfile.open("test.out", ios::app);
         left = right = NULL;
     }
 
     // Constructor for bstNode, takes parameter inputs of the int data and the id of the node
     bstNode(int d, int _id) {
-        outfile.open("test.out", ios::app);
         data = d;
         id = _id;
     }
 
     // Prints the DOT data structure for a node, containing the ID and label with the node's
     // data. Splits the record shape into two halves at the bottom for easier visualization.
-    void printLabels() {
+    void printLabels(ofstream &outfile) {
         if (id != 1) {
             cout << "\n\t";
+            outfile << "\n\t";
         }
         cout << id << " [label=\"{<data> " << data << " | {<left> | <right>}}\"];";
         outfile << id << " [label=\"{<data> " << data << " | {<left> | <right>}}\"];";
@@ -96,7 +94,7 @@ struct bstNode {
     
     // Prints the connections between the parent node and its left and right children, if they
     // exist.
-    void printConnections() {
+    void printConnections(ofstream &outfile) {
         string result = "";
         if (left) {
             result.append("\n\t" + to_string(id) + ":left -> " + to_string(left->id) + ";");
@@ -193,7 +191,7 @@ private:
     // print both its own data and the data of its left and right children, if they exist.
     void printNodeConnections(bstNode *node) {
         if (node == NULL) return;
-        node->printConnections();
+        node->printConnections(outfile);
         printNodeConnections(node->left);
         printNodeConnections(node->right);
     }
@@ -202,7 +200,7 @@ private:
     // both its own data and the data of its left and right children, if they exist.
     void printNodeLabels(bstNode *node) {
         if (node == NULL) return;
-        node->printLabels();
+        node->printLabels(outfile);
         printNodeLabels(node->left);
         printNodeLabels(node->right);
     }
