@@ -195,28 +195,6 @@ public:
     }
 
     /**
-     * Public : List
-     * 
-     * Description:
-     *      Overloaded constructor, creates a linked list with nodes containing each integer
-     *      in the passed in vector. Also opens our output file.
-     * 
-     * Params:
-     *      N/A
-     * 
-     * Returns:
-     *      N/A
-     */
-    List(vector<int> dataSet) {
-        outfile.open("test.out", ios::app);
-        front = tail = nullptr;
-        curr_id = 0;
-        for (int i = 0; i < dataSet.size(); i++) {
-            addNode(dataSet[i]);
-        }
-    }
-
-    /**
      * Public : addNode
      * 
      * Description:
