@@ -45,7 +45,7 @@ int main() {
     L.addNode(7);
     L.addNode(9);
     L.addNode(2);
-    L.addNode(13);
+    L.addNode(12);
     L.addNode(4);
     L.addEdge(1, 2);        // Adds an explicit edge between the first and second node
     L.addEdge(4, 3);        
