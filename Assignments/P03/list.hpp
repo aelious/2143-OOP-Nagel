@@ -168,6 +168,8 @@ class List {
     int curr_id;            // Holds the most recent id of the graphviz object
     int max;                // Max number in the node data set 
     int min;                // Min number in the node data set
+    int variance;           // Holds 1/3 of the max - min so it can assign nodes different
+                            // attributes depending on their held data
     map<int, vector<listEdge*>> nodeEdgeMap; //<ID, vector<pointer to list edge>>
     listNode *front;            // Holds the address of the start of our linked list.
     listNode *tail;             // Holds the address of the end of our linked list.
@@ -268,11 +270,7 @@ public:
                 if (nodeEdgeMap[fm][tempIndex]->attributes["dir"] == "none") {
                     nodeEdgeMap[fm][tempIndex]->attributes["dir"] = "forward";
                     nodeEdgeMap[fm][tempIndex]->attributes["arrowhead"] = "vee";
-                    if(fm > to) {
-                        nodeEdgeMap[fm][tempIndex]->attributes["color"] = "deeppink";
-                    } else {
-                        nodeEdgeMap[fm][tempIndex]->attributes["color"] = "cyan";
-                    }
+                    nodeEdgeMap[fm][tempIndex]->attributes["color"] = "cyan";
                     return;
                 }
                 // If the found edge is the edge of a higher id pointing to the lower id,
@@ -328,15 +326,15 @@ public:
                     nodeEdgeMap[fm].push_back(e);
                 }
             } 
-            
+            // If an edge is found one way from the node with id 'to' to the node with id 'fm'
             else {
                 int otherIndex = findEdgeIndex(to, fm);
                 if (nodeEdgeMap[to][otherIndex]->attributes["dir"] == "both") {
                     cout << "Edge already exists!\n";
                     return;
                 }
-                // If the found edge between the to index ID is the default edge, it can be
-                // assumed that it is the smaller ID of the two, so the values are set
+                // If the found edge between the node with id 'to' is the default edge, it can 
+                // be assumed that it is the smaller ID of the two, so the values are set
                 // accordingly.
                 else if (nodeEdgeMap[to][otherIndex]->attributes["dir"] == "none") {
                     nodeEdgeMap[to][otherIndex]->attributes["dir"] = "back";
@@ -344,7 +342,8 @@ public:
                     nodeEdgeMap[to][otherIndex]->attributes["arrowhead"] = "vee";
                     nodeEdgeMap[to][otherIndex]->attributes["color"] = "deeppink"; 
                 }
-                // If the node to be created doesn't exist but the other 
+                // If the edge to be created doesn't exist, but the other node has an edge
+                // to the fm ID
                 else {
                     if (fm < to) {
                         listEdge *e = new listEdge(to);
@@ -468,73 +467,50 @@ public:
     }
 
     /**
-     * Public : setNodeAttributes
-     * 
-     * Description:
-     *      Runs at the time of printing the DOT notation, so that the minimum and maximum
-     *      data values remain concrete. The data set range is split into thirds and the 
-     *      node's attributes are given variance based on the value of the data they contain.
-     * 
-     *      Structure of the variance: 
-     *      > ID's with data in the lower third are given a shape of record and a mixed color
-     *      of cornflowerblue and blue4
-     *      > ID's with data in the middle third are given a shape of doublecircle and a mixed
-     *      color of deeppink3 and pink
-     *      > ID's with data in the upper third are given a shape of star and a mixed color of
-     *      darkgoldenrod3 and gold
-     * 
-     * Params:
-     *      int     : id of the node whose attributes will be set
-     * 
-     * Returns:
-     *      N/A
-     */
-    void setNodeAttributes(int id) {
-        int mid = (min+max)/2;
-        int variance = ((mid - min)/2);
-        listNode *travel = front;
-        // There is definitely a better way to do this than to traverse it every single time,
-        // but it works for now. I may optimize it later! Make sure you have a good CPU :-)
-        while(travel->id != id && travel) travel = travel->next;
-        // Gives variance to node attributes based on the data in the node
-        if (travel->data >= min && travel->data < mid - ((mid - min)/2)) {
-            travel->color = "\"cornflowerblue:blue4\"";
-            travel->shape = "record";
-        } else if (travel->data >= mid - variance && travel->data < mid + variance) {
-            travel->color = "\"deeppink3:pink\"";
-            travel->shape = "doublecircle";
-        } else {
-            travel->color = "\"darkgoldenrod3:gold\"";
-            travel->shape = "star";
-        }
-    }
-
-    /**
      * Public : printNodeAttributes
      * 
      * Description:
-     *      Returns the string of all the node attributes in DOT notation
-     * 
+     *      Traverses the linked list and assigns each node their proper attributes based on
+     *      the data they contain and appends the DOT notation of a node to the result to be
+     *      returned
      * Params:
-     *      int     : id of the node whose attributes will be returned
+     *      N/A
      * 
      * Returns:
-     *      String of the node attributes in DOT notation.
+     *      String containing the entirety of the DOT notation for the node attribute assignment
+     *      portion of our final output.
      */
-    string printNodeAttributes(int id) {
+    string printNodeAttributes() {
+        int variance = ((max - min)/3);
         string result = "";
-        // Provides proper formatting:
-        if (id != 1) {
-            result.append("\n\t");
-        }
-        // Will look like: id [label=id->data, shape=id->shape, color=id->color];
-        result.append(to_string(id) + " [label=\"");
         listNode *travel = front;
-        // Again, there is absolutely a more efficient way of doing this loop externally, but
-        // I will focus on optimization later!
-        while(travel->id != id && travel) travel = travel->next;
-        result.append(to_string(travel->data) + "\", shape="+travel->shape+", color=");
-        result.append(travel->color+"];");
+        // Traverses the linked list and assigns attributes to each node based on its data
+        while(travel) {
+            // Lower 1/3 gets a shape of record and a color of cornflowerblue:blue4
+            if (travel->data >= min && travel->data < min + variance) {
+                travel->color = "\"cornflowerblue:blue4\"";
+                travel->shape = "record";
+            } 
+            // Middle 1/3 gets a shape of doublecircle and a color of deeppink3:pink
+            else if (travel->data >= min + variance && travel->data < max - variance) {
+                travel->color = "\"deeppink3:pink\"";
+                travel->shape = "doublecircle";
+            } 
+            // Upper 1/3 gets a shape of star and a color of darkgoldenrod3:gold
+            else {
+                travel->color = "\"darkgoldenrod3:gold\"";
+                travel->shape = "star";
+            }
+            // For proper DOT formatting:
+            if (travel->id != 1) {
+            result.append("\n\t");
+            }
+            // Will look like: id [label=id->data, shape=id->shape, color=id->color];
+            result.append(to_string(travel->id) + " [label=\"");
+            result.append(to_string(travel->data) + "\", shape="+travel->shape+", color=");
+            result.append(travel->color+"];");
+            travel = travel->next;
+        }
         return result;
     }
 
@@ -542,36 +518,39 @@ public:
      * Public : printEdgeAttributes
      * 
      * Description:
-     *      Returns the string of all the edges and their attributes of an id in DOT notation
+     *      Traverses our linked list and appends result with the edges of each node in DOT 
+     *      notation. 
      * 
      * Params:
-     *      int     : id of the node whose edges' attributes will be returned
+     *      N/A
      * 
      * Returns:
-     *      String of each of the id's edges' attributes in DOT notation.
+     *      String containing the entirety of the DOT notation for the edges contained in our
+     *      linked list for the edge assignment portion of our final output.
      */
-    string printEdgeAttributes(int id) {
-        // For formatting: If last id in the map and has no edges
-        if (id == curr_id && nodeEdgeMap[id].empty()) {
-            return ("\n\t" + to_string(id) + " -> " + nullEdgeSettings);
-        }
+    string printEdgeAttributes() {
         string result = "";
-        for (int i = 0; i < nodeEdgeMap[id].size(); i++) {
-            // idFrom:e -> idTo:w [edgeSettings]; * DOT Notation
-            result.append("\n\t" + to_string(id));
-            // Points from e to w if the id is smaller and w to e if the id is larger, makes
-            // for a prettier and easier to understand output.
-            id < nodeEdgeMap[id][i]->idTo ? result.append(":e -> ") : result.append(":w -> ");
-            result.append(to_string(nodeEdgeMap[id][i]->idTo));
-            id < nodeEdgeMap[id][i]->idTo ? result.append(":w") : result.append(":e");
-            result.append(nodeEdgeMap[id][i]->print());
-            // If it's the last node, append null edge and settings at the end
-            if (id == curr_id) {
-                result.append(("\n\t" + to_string(id) + " -> " + nullEdgeSettings));
+        listNode *travel = front;
+        while(travel) {
+            if (travel->id == curr_id && nodeEdgeMap[travel->id].empty()) {
+                result.append("\n\t" + to_string(travel->id) + " -> " + nullEdgeSettings);
             }
+            for (int i = 0; i < nodeEdgeMap[travel->id].size(); i++) {
+                // idFrom:e -> idTo:w [edgeSettings]; * DOT Notation
+                result.append("\n\t" + to_string(travel->id) + ":e -> ");
+                result.append(to_string(nodeEdgeMap[travel->id][i]->idTo) + ":w ");
+                result.append(nodeEdgeMap[travel->id][i]->print());
+                // If it's the last node, append null edge and settings at the end
+                if (travel->id == curr_id) {
+                    result.append(("\n\t" + to_string(travel->id) + " -> " + nullEdgeSettings));
+                }
+            }
+            travel = travel->next;
         }
         return result;
     }
+
+    
 
     /**
      * Public : printDOT
@@ -598,25 +577,13 @@ public:
         string result = "";
         // Append the background settings for our linked list to the top of the output.
         result.append(bgSettingsList);
-        // Traverses the linked list and appends all nodes and their attributes to the DOT
-        // output.
-        while(travel) {
-            setNodeAttributes(travel->id);
-            result.append(printNodeAttributes(travel->id));
-            travel = travel->next;
-        }
-        travel = front;
-        // Traverses the linked list and appends all the edges of each node and their 
-        // attributes to the DOT output.
-        while(travel) {
-            result.append(printEdgeAttributes(travel->id));
-            travel = travel->next;
-        }
+        result.append(printNodeAttributes());
+        result.append(printEdgeAttributes());
         // Formatting for the DOT language
         result.append("\n}\n");
         // Print and log DOT notation
-        outfile << result << endl;
         cout << result << endl;
+        outfile << result << endl;
     }
         
 };
