@@ -168,7 +168,7 @@ class List {
     int curr_id;            // Holds the most recent id of the graphviz object
     int max;                // Max number in the node data set 
     int min;                // Min number in the node data set
-    map<int, vector<listEdge*>> nodeEdgeMap; //<ID, vector<int>edgesTo>
+    map<int, vector<listEdge*>> nodeEdgeMap; //<ID, vector<pointer to list edge>>
     listNode *front;            // Holds the address of the start of our linked list.
     listNode *tail;             // Holds the address of the end of our linked list.
 
