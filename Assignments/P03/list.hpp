@@ -144,10 +144,9 @@ struct listEdge {
  *      int                 findEdgeIndex(int fm, int to)
  *      void                removeEdge(int fm, int to)
  *      bool                foundEdge(int idFm, int idTo) 
- *      void                setMinMax(int data, int id) {
- *      void                setNodeAttributes(int id)
- *      string              printNodeAttributes(int id) 
- *      string              printEdgeAttributes(int id)
+ *      void                setMinMax(int data, int id)
+ *      string              printNodeAttributes() 
+ *      string              printEdgeAttributes()
  *      void                printDOT()                 
  * 
  * Private Methods:
@@ -177,7 +176,7 @@ class List {
 public:
 
     /**
-     * Public : Graphviz
+     * Public : List
      * 
      * Description:
      *      Default constructor, creates a linked list with nothing in it and opens our output
