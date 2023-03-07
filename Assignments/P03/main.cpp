@@ -33,6 +33,8 @@
 
 // Driver of the program
 int main() {
+    vector<int> linkedListData = {5, 7, 9, 2, 12, 4};
+    vector<int> bstData = {8, 3, 10, 1, 6, 4, 7, 14, 13};
     // Open output file
     ofstream outfile;
     outfile.open("test.out");
@@ -40,32 +42,14 @@ int main() {
     // Print header for solution
     outfile << "Stephanie Nagel\nFebruary 27, 2023\nSpring 2143\n" << endl;
 
-    List L;                 // Creates new linked list L
-    L.addNode(5);           // Adds a new node to L
-    L.addNode(7);
-    L.addNode(9);
-    L.addNode(2);
-    L.addNode(12);
-    L.addNode(4);
+    List L(linkedListData); // Creates new linked list L with nodes containing the vector data
     L.addEdge(1, 2);        // Adds an explicit edge between the first and second node
     L.addEdge(4, 3);        
     L.addEdge(3, 4);
     L.addEdge(6, 2);
-    L.printDOT();           // Prints the DOT notation of L so it can be visualized in
-                            // graphviz
+    L.printDOT();           // Prints the DOT notation of L to be visualized in graphviz
 
-    BST B;                  // Creates a new binary search tree B
-    B.insert(8);            // Adds a new node to B, set as the root of B, as it is the first
-                            // node in the tree.
-    B.insert(3);            // Adds a new node in the correct position in B
-    B.insert(10);
-    B.insert(1);
-    B.insert(6);
-    B.insert(4);
-    B.insert(7);
-    B.insert(14);
-    B.insert(13);
-    B.printDOT();           // Prints the DOT notation of B so it can be visualized in
-                            // graphviz
+    BST B(bstData);         // Creates a new binary search tree B with the data in the vector.
+    B.printDOT();           // Prints the DOT notation of B to be visualized in graphviz
     return 0;   
 }
