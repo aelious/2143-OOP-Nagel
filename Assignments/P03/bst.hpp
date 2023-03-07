@@ -214,6 +214,16 @@ public:
         root = NULL; 
     }
 
+    // Overloaded constructor that accepts a vector of integers to push onto the BST
+    BST(vector<int> dataSet) {
+        outfile.open("test.out", ios::app);
+        curr_id = 1;
+        root = NULL; 
+        for (int i = 0; i < dataSet.size(); i++) {
+            this->insert(dataSet[i]);
+        }
+    }
+
     // Calls the private method of the same name (with different parameters) using the root of
     // the tree as the base case and the integer data as the new node to be inserted.
     void insert(int data) {
