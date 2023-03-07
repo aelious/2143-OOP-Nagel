@@ -195,6 +195,28 @@ public:
     }
 
     /**
+     * Public : List
+     * 
+     * Description:
+     *      Overloaded constructor, creates a linked list with nodes containing each integer
+     *      in the passed in vector. Also opens our output file.
+     * 
+     * Params:
+     *      N/A
+     * 
+     * Returns:
+     *      N/A
+     */
+    List(vector<int> dataSet) {
+        outfile.open("test.out", ios::app);
+        front = tail = nullptr;
+        curr_id = 0;
+        for (int i = 0; i < dataSet.size(); i++) {
+            addNode(dataSet[i]);
+        }
+    }
+
+    /**
      * Public : addNode
      * 
      * Description:
@@ -232,7 +254,8 @@ public:
      *      one-way (the opposite direction), the smaller id of the two nodes will become
      *      a bidirectional edge and the other edge will be erased. If there is no preexisting
      *      connecton between the two nodes, an explicit edge with a forward direction to the
-     *      other node will be created.
+     *      other node will be created. I debated making this a nested switch controller but
+     *      I think it's plenty complicated already haha.
      * 
      * Params:
      *      int     : id of the node where the new edge will come from
