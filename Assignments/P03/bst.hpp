@@ -58,7 +58,7 @@ string bgSettingsBST = "digraph BST {\n\tbgcolor=\"deeppink:cyan\"\n\tlabel=\"BS
  *      bstNode leftNode(10, 2);    // Makes a new node with data 10 and ID 2
  *      bstNode rightNode(14, 3);   // Makes a new node with data 14 and ID 3
  *      someNode->right = rightNode;// Sets the right child of someNode to rightNode
- *      someNode->left = leftNode; // Sets the left child of someNode to leftNode
+ *      someNode->left = leftNode;  // Sets the left child of someNode to leftNode
  *      someNode.printLabels();     // Logs and outfiles the label of the node in DOT notation
  *      someNode.printConnections();// Logs and outfiles the children of someNode
  *      
@@ -125,7 +125,7 @@ struct bstNode {
  *                                      // current ID to 1 in preparation for the initial
  *                                      // node.
  *      void               insert(int data)    // Calls the private method insert
- *                                              // with different parameters.
+ *                                             // with different parameters.
  *      void                printDOT()  // Logs and outfiles the DOT notation of the nodes in
  *                                      // the tree
  * 
