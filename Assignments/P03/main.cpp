@@ -28,8 +28,6 @@
 // Included libraries:
 #include "list.hpp"
 #include "bst.hpp"
-#include <iostream>
-#include <fstream>
 
 // Driver of the program
 int main() {
