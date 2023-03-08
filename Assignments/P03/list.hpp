@@ -333,7 +333,7 @@ public:
                     cout << "Edge already exists!\n";
                     return;
                 }
-                // If the found edge between the node with id 'to' is the default edge, it can 
+                // If the found edge between the node with id 'to' is the default edge, it can
                 // be assumed that it is the smaller ID of the two, so the values are set
                 // accordingly.
                 else if (nodeEdgeMap[to][otherIndex]->attributes["dir"] == "none") {

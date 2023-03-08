@@ -45,9 +45,9 @@ string bgSettingsBST = "digraph BST {\n\tbgcolor=\"deeppink:cyan\"\n\tlabel=\"BS
  * 
  * Public Methods:
  *                          bstNode()           
- *                          bstNode(int data, int _id)
- *      void                printLabels() 
- *      void                printConnections()
+ *                          bstNode(int d, int _id)
+ *      void                printLabels(ofstream& outfile) 
+ *      void                printConnections(ofstream& outfile)
  * 
  * Private Methods:
  *                          N/A
@@ -69,20 +69,56 @@ struct bstNode {
     bstNode *left;          // left child node
     bstNode *right;         // right child node
 
-    // Default constructor. Not meant to be used really, but designed to initialize left and
-    // right to NULL to prevent potential errors upon usage.
+    /**
+     * Public : bstNode
+     * 
+     * Description:
+     *      Default constructor. Not meant to be used really, but designed to initialize 
+     *      left and right to NULL to prevent potential errors upon usage.
+     * 
+     * Params:
+     *      N/A
+     * 
+     * Returns:
+     *      N/A
+     */
     bstNode() {
         left = right = NULL;
     }
 
+    /**
+     * Public : bstNode
+     * 
+     * Description:
+     *      Overloaded constructor for bstNode, takes parameter inputs of the int data and 
+     *      the id of the node
+     * Params:
+     *      int         : data to be included in the new node
+     *      int         : id given to the new node (for proper printing)
+     * 
+     * Returns:
+     *      bstNode *   : the root of the new tree (recursively)
+     */
     // Constructor for bstNode, takes parameter inputs of the int data and the id of the node
     bstNode(int d, int _id) {
         data = d;
         id = _id;
     }
 
-    // Prints the DOT data structure for a node, containing the ID and label with the node's
-    // data. Splits the record shape into two halves at the bottom for easier visualization.
+    /**
+     * Public : printLabels
+     * 
+     * Description:
+     *      Prints the DOT data structure for a node, containing the ID and label with the 
+     *      node's data. Splits the record shape into two halves at the bottom for easier 
+     *      visualization.
+     * 
+     * Params:
+     *      ofstream &  : where to print the data to
+     * 
+     * Returns:
+     *      N/A
+     */
     void printLabels(ofstream &outfile) {
         if (id != 1) {
             cout << "\n\t";
@@ -92,8 +128,19 @@ struct bstNode {
         outfile << id << " [label=\"{<data> " << data << " | {<left> | <right>}}\"];";
     }
     
-    // Prints the connections between the parent node and its left and right children, if they
-    // exist.
+    /**
+     * Public : printConnections
+     * 
+     * Description:
+     *      Prints the connections between the parent node and its left and right children, 
+     *      if they exist. Uses proper DOT syntax
+     * 
+     * Params:
+     *      ofstream &  : where to print the data to
+     * 
+     * Returns:
+     *      N/A
+     */
     void printConnections(ofstream &outfile) {
         string result = "";
         if (left) {
@@ -121,25 +168,15 @@ struct bstNode {
  *      position in the tree that has not been defined yet.
  * 
  * Public Methods:
- *                          BST()       // Constructor for our BST. Sets root to NULL and
- *                                      // current ID to 1 in preparation for the initial
- *                                      // node.
- *      void               insert(int data)    // Calls the private method insert
- *                                             // with different parameters.
- *      void                printDOT()  // Logs and outfiles the DOT notation of the nodes in
- *                                      // the tree
+ *                          BST()
+ *      void                insert(int data)
+ *      void                printDOT()
  * 
  * Private Methods:
- *      bstNode*            insert(bstNode *node, int data) // Overloaded method which inserts
- *                                      // a new node with int data upon finding the proper
- *                                      // placement for it.
- *      void                print(bstNode *node)    // Recursively prints the data in every
- *                                      // node in the BST. Calls two other print methods
- *                                      // which also call their own different print methods
- *      void                printNodeConnections()   // Recursively calls the bstNode method
- *                                      // printConnections() on each node
- *      void                printNodeLabels()        // Recursively calls the bstNode method
- *                                      // printLabels() on each node
+ *      bstNode*            insert(bstNode *node, int data)
+ *      void                print(bstNode *node)
+ *      void                printNodeConnections()
+ *      void                printNodeLabels()
  * 
  * Usage: 
  *      BST B;                  // Creates new BST called B, B's root is set to NULL and ID=1
@@ -163,8 +200,20 @@ private:
     int curr_id;        // ID of the most recently inserted node. Allows for incrementation.
     ofstream outfile;   // Output file for our results after computation
 
-    // Binary search tree insertion method, with added functionality of maintaining and
-    // assigning an ID to the node upon insertion.
+    /**
+     * Private : insert
+     * 
+     * Description:
+     *      Binary search tree insertion method, with added functionality of maintaining and
+     *      assigning an ID to the node upon insertion.
+     * 
+     * Params:
+     *      bstNode *   : node whose data is to be compared with the data of the new node
+     *      int         : data to be included in the new node
+     * 
+     * Returns:
+     *      bstNode *   : the root of the new tree (recursively)
+     */
     bstNode *insert(bstNode *node, int data) {
         if (node == NULL) {
             node = new bstNode();
@@ -181,14 +230,36 @@ private:
         return node;
     }
 
-    // Print calls the two recursive print methods with an intake of where to start.
+    /**
+     * Private : print
+     * 
+     * Description:
+     *      Print calls the two recursive print methods with an intake of where to start.
+     * 
+     * Params:
+     *      bstNode *   : Node of where to begin the print process.
+     * 
+     * Returns:
+     *      N/A
+     */
     void print(bstNode *node) {
         printNodeLabels(node);
         printNodeConnections(node); 
     }
 
-    // Recursively calls the method of bstNode printConnections() allowing for each node to
-    // print both its own data and the data of its left and right children, if they exist.
+    /**
+     * Private : printNodeConnections
+     * 
+     * Description:
+     *      Recursively calls the method of bstNode printConnections() allowing for each node to
+     *      print both its own data and the data of its left and right children, if they exist.
+     * 
+     * Params:
+     *      bstNode *   : Node of where to begin the print process.
+     * 
+     * Returns:
+     *      N/A
+     */
     void printNodeConnections(bstNode *node) {
         if (node == NULL) return;
         node->printConnections(outfile);
@@ -196,8 +267,19 @@ private:
         printNodeConnections(node->right);
     }
 
-    // Recursively calls the method of bstNode printLabels() allowing for each node to print
-    // both its own data and the data of its left and right children, if they exist.
+    /**
+     * Private : BST
+     * 
+     * Description:
+     *      Recursively calls the method of bstNode printLabels() allowing for each node to print
+     *      both its own data and the data of its left and right children, if they exist.
+     * 
+     * Params:
+     *      bstNode *   : Node of where to begin the print process.
+     * 
+     * Returns:
+     *      N/A
+     */
     void printNodeLabels(bstNode *node) {
         if (node == NULL) return;
         node->printLabels(outfile);
@@ -206,22 +288,57 @@ private:
     }
 
 public:
-    // Default constructor for our binary search tree. Initializes the root node to NULL and
-    // the starting ID to 1
+    /**
+     * Public : BST
+     * 
+     * Description:
+     *      Default constructor for the binary search tree class. Sets the current id to 1
+     *      and the root node to null. Also opens the output file in append mode.
+     * 
+     * Params:
+     *      N/A
+     * 
+     * Returns:
+     *      N/A
+     */
     BST() {
         outfile.open("test.out", ios::app);
         curr_id = 1;
         root = NULL; 
     }
 
-    // Calls the private method of the same name (with different parameters) using the root of
-    // the tree as the base case and the integer data as the new node to be inserted.
+    /**
+     * Public : insert
+     * 
+     * Description:
+     *      Sets the root to the node containing the new info by calling the private insert
+     *      method of the same name. Essentially finds the correct position of the new node
+     *      and then sends that complete linked node collection back to root. 
+     * 
+     * Params:
+     *      int     : data to be saved in the newly inserted node object
+     * 
+     * Returns:
+     *      N/A
+     */
     void insert(int data) {
         root = insert(root, data); 
     }
 
-    // Prints the background settings for the BST graphviz followed by calling the private
-    // print method. And finally, adds proper formatting for DOT notation.
+    /**
+     * Public : printDOT
+     * 
+     * Description:
+     *      Prints the background settings for our graphviz visualization followed by calling
+     *      the private method print using root as the starting point. Finally, adds a closing
+     *      bracket to the output for proper DOT syntax.
+     * 
+     * Params:
+     *      N/A
+     * 
+     * Returns:
+     *      N/A
+     */
     void printDOT() {
         cout << bgSettingsBST;
         outfile << bgSettingsBST;
