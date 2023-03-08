@@ -99,7 +99,6 @@ struct bstNode {
      * Returns:
      *      bstNode *   : the root of the new tree (recursively)
      */
-    // Constructor for bstNode, takes parameter inputs of the int data and the id of the node
     bstNode(int d, int _id) {
         data = d;
         id = _id;
