@@ -283,7 +283,7 @@ public:
                     nodeEdgeMap[fm][tempIndex]->attributes["color"] = "\"mediumspringgreen"
                     ":coral1\"";
                 } else {
-                    cout << "Edge already exists!\n";
+                    // The edge already exists!
                     return;
                 }
             } else {
@@ -331,7 +331,7 @@ public:
             else {
                 int otherIndex = findEdgeIndex(to, fm);
                 if (nodeEdgeMap[to][otherIndex]->attributes["dir"] == "both") {
-                    cout << "Edge already exists!\n";
+                    // The edge already exists!
                     return;
                 }
                 // If the found edge between the node with id 'to' is the default edge, it can
