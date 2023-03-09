@@ -176,6 +176,7 @@ struct bstNode {
  *      void                print(bstNode *node)
  *      void                printNodeConnections()
  *      void                printNodeLabels()
+ *      void                randomBST()
  * 
  * Usage: 
  *      BST B;                  // Creates new BST called B, B's root is set to NULL and ID=1

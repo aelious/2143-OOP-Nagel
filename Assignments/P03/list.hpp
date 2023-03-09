@@ -147,7 +147,8 @@ struct listEdge {
  *      void                setMinMax(int data, int id)
  *      string              printNodeAttributes() 
  *      string              printEdgeAttributes()
- *      void                printDOT()                 
+ *      void                printDOT()               
+ *      void                randomizeList()  
  * 
  * Private Methods:
  *                          N/A
