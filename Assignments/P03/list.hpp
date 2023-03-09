@@ -407,7 +407,6 @@ public:
         int index = findEdgeIndex(fm, to);
         // If edge isn't found, print message and do nothing, otherwise delete the edge.
         if (index == -1) {
-            cout << "Edge not found in the node so it cannot be removed.\n";
             return;
         } else {
             nodeEdgeMap[fm].erase(nodeEdgeMap[fm].begin()+index);
