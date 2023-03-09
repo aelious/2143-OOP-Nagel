@@ -47,3 +47,83 @@ digraph BST {
 	3:right -> 8;
 	8:left -> 9;
 }
+
+digraph LinkedList {
+	rankdir=LR
+	bgcolor="black:purple"
+	label="Linked List"
+	fontcolor=white
+	node [fontcolor=black, style=filled, tailclip=true, fixedsize=true];
+	null [shape=circle, style=filled, color="yellow:red"];
+	1 [label="6", shape=doublecircle, color="deeppink3:pink"];
+	2 [label="11", shape=star, color="darkgoldenrod3:gold"];
+	3 [label="1", shape=record, color="cornflowerblue:blue4"];
+	4 [label="9", shape=star, color="darkgoldenrod3:gold"];
+	5 [label="13", shape=star, color="darkgoldenrod3:gold"];
+	6 [label="11", shape=star, color="darkgoldenrod3:gold"];
+	7 [label="3", shape=record, color="cornflowerblue:blue4"];
+	8 [label="5", shape=doublecircle, color="deeppink3:pink"];
+	9 [label="8", shape=doublecircle, color="deeppink3:pink"];
+	10 [label="8", shape=doublecircle, color="deeppink3:pink"];
+	1:e -> 2:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, dir=none, style=dashed];
+	1:e -> 4:w [arrowhead=vee, arrowtail=dot, color=cyan, dir=forward];
+	1:e -> 7:w [arrowhead=normal, arrowtail=normal, color="mediumspringgreen:coral1", dir=both];
+	2:e -> 3:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, dir=none, style=dashed];
+	3:e -> 4:w [arrowhead=normal, arrowtail=normal, color="mediumspringgreen:coral1", dir=both];
+	3:e -> 5:w [arrowhead=vee, arrowtail=dot, color=cyan, dir=forward];
+	3:e -> 9:w [arrowhead=vee, arrowtail=dot, color=cyan, dir=forward];
+	4:e -> 5:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, dir=none, style=dashed];
+	5:e -> 6:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, dir=none, style=dashed];
+	6:e -> 7:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, dir=none, style=dashed];
+	7:e -> 8:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, dir=none, style=dashed];
+	8:e -> 9:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, dir=none, style=dashed];
+	9:e -> 10:w [arrowhead=none, arrowtail=dot, color=mediumorchid1, dir=none, style=dashed];
+	10 -> null [arrowhead=inv, arrowtail=inv, dir=forward, tailclip=true, style=dotted, color=blue4];
+}
+
+digraph BST {
+	bgcolor="deeppink:cyan"
+	label="BST"
+	fontcolor=white
+	node [fontcolor=black, style=filled, tailclip=true, shape=record, fixedsize=true];
+	1 [label="{<data> 6 | {<left> | <right>}}"];
+	3 [label="{<data> 1 | {<left> | <right>}}"];
+	17 [label="{<data> 1 | {<left> | <right>}}"];
+	20 [label="{<data> 1 | {<left> | <right>}}"];
+	7 [label="{<data> 3 | {<left> | <right>}}"];
+	14 [label="{<data> 3 | {<left> | <right>}}"];
+	8 [label="{<data> 5 | {<left> | <right>}}"];
+	12 [label="{<data> 5 | {<left> | <right>}}"];
+	15 [label="{<data> 4 | {<left> | <right>}}"];
+	2 [label="{<data> 11 | {<left> | <right>}}"];
+	4 [label="{<data> 9 | {<left> | <right>}}"];
+	9 [label="{<data> 8 | {<left> | <right>}}"];
+	10 [label="{<data> 8 | {<left> | <right>}}"];
+	6 [label="{<data> 11 | {<left> | <right>}}"];
+	16 [label="{<data> 11 | {<left> | <right>}}"];
+	5 [label="{<data> 13 | {<left> | <right>}}"];
+	11 [label="{<data> 13 | {<left> | <right>}}"];
+	13 [label="{<data> 14 | {<left> | <right>}}"];
+	18 [label="{<data> 14 | {<left> | <right>}}"];
+	19 [label="{<data> 16 | {<left> | <right>}}"];
+	1:left -> 3;
+	1:right -> 2;
+	3:left -> 17;
+	3:right -> 7;
+	17:left -> 20;
+	7:left -> 14;
+	7:right -> 8;
+	8:left -> 12;
+	12:left -> 15;
+	2:left -> 4;
+	2:right -> 5;
+	4:left -> 9;
+	4:right -> 6;
+	9:left -> 10;
+	6:left -> 16;
+	5:left -> 11;
+	5:right -> 13;
+	13:left -> 18;
+	13:right -> 19;
+}
+
