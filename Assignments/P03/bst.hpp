@@ -339,10 +339,36 @@ public:
      *      N/A
      */
     void printDOT() {
+        // Prevents errors when printDOT is run twice on the same BST
+        if (!outfile.is_open()) {
+            outfile.open("test.out", ios::app);
+        };
         cout << bgSettingsBST;
         outfile << bgSettingsBST;
         print(root);
-        cout << "\n}\n";
-        outfile << "\n}\n";
+        outfile << "\n}\n\n";
+        cout << "\n}\n\n";
+        outfile.close();
+    }
+
+    /**
+     * Public : randomizeBST
+     * 
+     * Description:
+     *      Creates 20 nodes with random integers between 1 & 20. Used to check for accuracy
+     *      in code.
+     * 
+     * Params:
+     *      N/A
+     * 
+     * Returns:
+     *      N/A
+     */
+    void randomizeBST() {
+        srand((unsigned) time(NULL));
+        // Create 20 nodes with random integers 1 - 20
+        for (int i = 0; i < 20; i++) {
+            this->insert(rand() % 20 + 1);
+        }
     }
 };

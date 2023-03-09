@@ -566,6 +566,10 @@ public:
      *      N/A
      */
     void printDOT() {
+        // Prevents errors when printDOT is run twice on the same list.
+        if (!outfile.is_open()) {
+            outfile.open("test.out", ios::app);
+        };
         listNode *travel = front;
         // If the list is empty, return the empty list in DOT notation.
         if (!travel) {
@@ -584,6 +588,38 @@ public:
         // Print and log DOT notation
         cout << result << endl;
         outfile << result << endl;
+        outfile.close();
     }
-        
+
+    /**
+     * Public : randomizeList
+     * 
+     * Description:
+     *      Creates 10 random nodes in the list containing integer data from 1 to 20. Creates
+     *      5 random edges between the nodes, with a ~14.3% chance of having the created edge
+     *      be explicitly bidirectional. (In addition to the very low chance that 2 nodes will
+     *      point to each other). Testing for holes in the logic.
+     * 
+     * Params:
+     *      N/A
+     * 
+     * Returns:
+     *      N/A
+     */
+    void randomizeList() {
+        srand((unsigned) time(NULL));
+        // Create 10 nodes with random integers 1 - 20
+        for (int i = 0; i < 10; i++) {
+            this->addNode(rand() % 20 + 1);
+        }
+        // Create 5 edges between two random nodes, with a ~14.3% chance to be bidirectional
+        for (int i = 0; i < 5; i++) {
+            int fmRand = rand() % 10 + 1;
+            int toRand = rand() % 10 + 1;
+            this->addEdge(fmRand, toRand);
+            if (rand() % 7 == 0) {
+                this->addEdge(toRand, fmRand);
+            }
+        }
+    }
 };

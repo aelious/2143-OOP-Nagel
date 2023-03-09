@@ -62,5 +62,14 @@ int main() {
     B.insert(14);
     B.insert(13);
     B.printDOT();       // Prints the DOT notation of B to be visualized in graphviz
+
+    List RandomList;    
+    RandomList.randomizeList();     // Creates 10 new nodes in randomList with random data 
+    RandomList.printDOT();          // and 5 random edges between the nodes
+
+    BST RandomBST;
+    RandomBST.randomizeBST();       // Creates 20 new nodes in RandomBST with random data
+    RandomBST.printDOT();
+    
     return 0;   
 }
