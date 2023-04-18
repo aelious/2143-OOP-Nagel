@@ -8,8 +8,8 @@ This is a primer intended to provide easy-to-digest information about some terms
 
 |   #   | File            | Description                                        |
 | :---: | --------------- | -------------------------------------------------- |
-|  1   | [Wiki](https://github.com/aelious/2143-OOP-Nagel/wiki)  | OOP primer for different concepts. |
-|  2   | [banner.txt](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/A04/banner.txt)| Project Banner |
+| 1 | [Wiki](https://github.com/aelious/2143-OOP-Nagel/wiki) | OOP primer for different concepts. |
+| 2 | [banner.txt](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/A04/banner.txt) | Project Banner |
 
 
 ### Topics Explained Include:
