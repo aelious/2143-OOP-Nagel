@@ -11,4 +11,4 @@ Implements classes in Python to do something fun with dice!
 | 1 | [placeholder1.py]() | Main driver of the program |
 | 2 | [placeholder2.py]() | Python definitions or something :-D |
 | 3 | [placeholder3.py]() | Python definitions or something :-D |
-| 4 | [banner.txt]() | Project Banner |
+| 4 | [banner.txt](https://github.com/aelious/2143-OOP-Nagel/blob/main/Assignments/P04/banner.txt) | Project Banner |
