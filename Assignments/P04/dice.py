@@ -3,7 +3,7 @@
 # syntax reminders and implementation!
 
 # Importing libraries is the same as #include <someLibrary> in cpp
-import random 
+from random import randint
 
 # Class declaration in python. Every in-line method will require 'self' as a parameter!
 class Die:
@@ -18,7 +18,7 @@ class Die:
     def roll(self, rolls=1):
         sum = 0
         while rolls > 0:
-            sum += (random.randint(1, self.sides))
+            sum += (randint(1, self.sides))
             rolls -= 1
         return sum
     
