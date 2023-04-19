@@ -119,7 +119,7 @@ class Dice:
             # Calls the constructor for Die, pushes the instance onto our dice list
             self.dice.append(Die(s))
             n -= 1
-            
+
     """
     # __str__
     # Description:
@@ -205,7 +205,8 @@ def main():
 
     print("\nLets roll each of the dice in our set once!")
     # Roll each of our 5 dice 1 time
-    print("Our rolled dice totalled {} out of a possible {}".format(myDice.roll(),myDice.maxRoll()))
+    print("Our rolled dice totalled {} out of a possible {}".format(myDice.roll(),
+        myDice.maxRoll()))
 
     # 5 dice # 8 sides = 40 maximum pips...prints 40. I can do maths yay :-)
     print("\nMaximum roll in our current set of dice: {}".format(myDice.maxRoll()))
@@ -215,7 +216,19 @@ def main():
 
     # Create a dice via a string
     l = Dice('4.d.20')
-    print("\nDice set created from string!\n{}".format(l))
+    print("\nDice set created from string!\n{}\n".format(l))
+
+    d20_1 = Dice(1, 20)
+    maxd20 = d20_1.maxRoll()
+
+    # Trying to roll a 20 on a d20 5 times!
+    for i in range(1, 6):
+        temp = 0
+        count = 0
+        while(temp != maxd20):
+            temp = d20_1.roll()
+            count += 1
+        print("Attempt {}: It took {} roll(s) to roll a 20 on a d20.".format(i, count))
 
 # Runs only if python is run on this file
 if __name__ == '__main__':
