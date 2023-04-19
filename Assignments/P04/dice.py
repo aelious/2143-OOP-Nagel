@@ -1,13 +1,55 @@
-# I'm going to be using a lot of this to get comfortable using Python again, so there
-# will be a lot of extraneous comments that won't help with code function so much as
-# syntax reminders and implementation!
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#              
+#  Author:           Stephanie Nagel
+#  Email:            aeliousx@gmail.com
+#  Label:            P04
+#  Title:            Roll Them Bones!
+#  Course:           CMPS 2143
+#  Semester:         Spring 2023
+# 
+#  Description:
+#        This program implements dice and die classes which have different
+#        functionality such as the ability to roll your die, compute max
+#        and average rolls of your different dice sets, and allows for easy
+#        printing of the dice!
+# 
+#  Usage:
+#        Inside directory: python main.py OR python dice.py
+# 
+#  Files:            main.py
+#                    dice.py
+#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# dice.py
 
 # Importing libraries is the same as #include <someLibrary> in cpp
 from random import randint
 
+
+"""
+# Class Die
+#
+# Description:
+#     This class implements a single die with a given number of sides (or 6 if a number is 
+#     unavailable)
+#
+# Methods:
+#     __init__(self, s)
+#     roll(self, rolls)
+#     __str__(self)
+#    
+"""
 # Class declaration in python. Every in-line method will require 'self' as a parameter!
 class Die:
-    # This is a constructor in python! It sets sides = 6 if no value is given to s
+
+    """
+    # __init__
+    # Description:
+    #     This is a constructor in python! It sets the sides of the created die to s.
+    #     If s is a bad type or isn't declared upon creation, sides will be set to 6.
+    # Returns:
+    #     N/A
+    """
     def __init__(self, s = None):
         # Implemented error checking here! :-) You're not allowed to tell me you have a 
         # 'pokemon' sided die >:-( I will change that to 6.
@@ -15,6 +57,25 @@ class Die:
             s = 6
         self.sides = s
 
+    """
+    # __str__
+    # Description:
+    #     This is similar to ostream overloading in c++. We define how we'd like our
+    #     die to be structured in the event that we print it.
+    # Returns:
+    #     The structured die as a string
+    """
+    def __str__(self) -> str:
+        return "[{}]".format(self.sides)
+    
+    """
+    # roll
+    # Description:
+    #     This method rolls our die a given number of times. If the number of times
+    #     isn't declared, the die will only be rolled once!
+    # Returns:
+    #     The sum of the rounds of rolls of our die
+    """
     def roll(self, rolls=1):
         sum = 0
         while rolls > 0:
@@ -22,13 +83,32 @@ class Die:
             rolls -= 1
         return sum
     
-    # Different way to create a cpp style overloaded operator in python!
-    # Allows you to format a class for easy printing. So when we print the 
-    # instance, this is how we want it structured!
-    def __str__(self) -> str:
-        return "[{}]".format(self.sides)
-
+"""
+# Class Dice
+#
+# Description:
+#     Implements a class that will hold n amount of die of side s. Allows for easy reuse
+#     of popular die-combinations! E.g. Casting a popular spell that requires you to
+#     roll 3 die with 20 sides to determine damage.
+#
+# Methods:
+#     __init__(self, n, s)
+#     __str__(self)
+#     roll(self)
+#     maxRoll(self)
+#     avgRoll(self)
+#
+"""
 class Dice:
+
+    """
+    # __init__
+    # Description:
+    #     Constructor for our Dice class. Creates n number of die, each with s sides.
+    #     If n is a string, n and s will be determined by splitting up the string.
+    # Returns:
+    #     N/A
+    """
     def __init__(self, n, s = None):
         self.dice = []
         if isinstance(n, str):
@@ -39,46 +119,74 @@ class Dice:
             # Calls the constructor for Die, pushes the instance onto our dice list
             self.dice.append(Die(s))
             n -= 1
-    
+            
+    """
+    # __str__
+    # Description:
+    #     Defines how we'd like our Dice class to be structured upon printing
+    # Returns:
+    #     The structured dice as a string
+    """
     def __str__(self) -> str:
         output = ""
         for i in self.dice:
             output += str(i)
         return output
 
+    """
+    # roll
+    # Description:
+    #     This method rolls each of the die in our set of dice a given number of times. 
+    #     If the number of times isn't declared, each die will only be rolled once!
+    # Returns:
+    #     The sum of the rounds of rolls of our die
+    """   
+    # This implementation will need to be reverted if mixed Dice sets are needed in
+    # the future. For example, 4d20 plus a d3 or something like that.
     def roll(self, rolls=1):
         sum = 0
         while (rolls > 0):
-            currRoll = 1
-            for i in self.dice:
-                tempNum = i.roll(1)
-                sum += tempNum
-                currRoll += 1
+            sum += self.dice[0].roll(len(self.dice))
             rolls -= 1
         return sum
     
+    """
+    # maxRoll
+    # Description:
+    #     This method determines the max possible sum of rolled die in the dice set
+    # Returns:
+    #     The maximum possible roll value of the set of dice
+    """
     def maxRoll(self) -> int:
         max = 0
         for i in self.dice:
             max += i.sides
         return max
     
+    """
+    # avgRoll
+    # Description:
+    #     This method determines the average summed die rolls
+    # Returns:
+    #     The average total when rolling the set of dice
+    """
     def avgRoll(self) -> int:
         avg = 0
         for i in self.dice:
             # We use + 1 here since 0 is not included in our avg
             avg += (i.sides + 1) / 2
         return avg
-    
-if __name__ == '__main__':
+
+# Unnecessary but it makes for a cleaner output :-)
+def main():
     # Create an instance of Die called d with sides = 4
     d = Die(4)
 
-    # Prints 4
+    # Prints the number of sides our newly created die has
     print("Sides of our dice = {}".format(d.sides))
 
     print("\nCool, now let's roll our {}-sided die twice three times!".format(d.sides))
-    # Rolls our 4-sided die twice, 3 times!
+    # Rolls our die twice, 3 times!
     for i in range(1, 4):
         print("Two-Roll Results {}: {}".format(i, d.roll(2)))
 
@@ -99,12 +207,16 @@ if __name__ == '__main__':
     # Roll each of our 5 dice 1 time
     print("Our rolled dice totalled {} out of a possible {}".format(myDice.roll(),myDice.maxRoll()))
 
-    # 5 dice * 8 sides = 40 maximum pips...prints 40. I can do maths yay :-)
+    # 5 dice # 8 sides = 40 maximum pips...prints 40. I can do maths yay :-)
     print("\nMaximum roll in our current set of dice: {}".format(myDice.maxRoll()))
 
-    # 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 36 / 8 = 4.5 avg per dice * 5 total dice = 22.5
+    # 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 36 / 8 = 4.5 avg per dice # 5 total dice = 22.5
     print("Average roll of our current set of dice: {}".format(myDice.avgRoll()))
 
     # Create a dice via a string
     l = Dice('4.d.20')
-    print("\n{}".format(l))
+    print("\nDice set created from string!\n{}".format(l))
+
+# Runs only if python is run on this file
+if __name__ == '__main__':
+    main()
