@@ -2,7 +2,7 @@
 ### Stephanie Nagel
 ### Description:
 
-Implements classes in Python to do something fun with dice!
+Implements die and dice classes in Python. The die can be rolled and the max and average rolls of a dice set can be determined.
 
 ### Files
 
