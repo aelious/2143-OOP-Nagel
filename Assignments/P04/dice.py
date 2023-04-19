@@ -22,7 +22,7 @@ class Die:
             rolls -= 1
         return sum
     
-    # Different way to create an cpp style overloaded operator in python!
+    # Different way to create a cpp style overloaded operator in python!
     # Allows you to format a class for easy printing. So when we print the 
     # instance, this is how we want it structured!
     def __str__(self) -> str:
@@ -72,7 +72,7 @@ class Dice:
     
 if __name__ == '__main__':
     b = Die(420)
-    print("Roll a {} out of 420.".format(b.roll()))
+    print("Roll a {} out of {}.".format(b.roll(), b.sides))
     d = Dice(5, 30)
     d.roll()
     print(len(d.dice))
