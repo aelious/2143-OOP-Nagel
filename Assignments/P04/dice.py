@@ -29,10 +29,12 @@ class Die:
         return "[{}]".format(self.sides)
 
 class Dice:
-    # Creates a list
-    dice = []
-
-    def __init__(self, n, s):
+    def __init__(self, n, s = None):
+        self.dice = []
+        if isinstance(n, str):
+            temp = n.split('.')
+            n = int(temp[0])
+            s = int(temp[2])
         while (n > 0):
             # Calls the constructor for Die, pushes the instance onto our dice list
             self.dice.append(Die(s))
@@ -51,10 +53,8 @@ class Dice:
             for i in self.dice:
                 tempNum = i.roll(1)
                 sum += tempNum
-                print("Dice {}: rolled a {} out of a possible {}! Current sum is {}.".format(currRoll, tempNum,i.sides, sum))
                 currRoll += 1
             rolls -= 1
-        print("** WOW! We scored a total of {} pips! **".format(sum))
         return sum
     
     def maxRoll(self) -> int:
@@ -71,10 +71,40 @@ class Dice:
         return avg
     
 if __name__ == '__main__':
-    b = Die(420)
-    print("Roll a {} out of {}.".format(b.roll(), b.sides))
-    d = Dice(5, 30)
-    d.roll()
-    print(len(d.dice))
-    print(d.maxRoll())
-    print(d.avgRoll())
+    # Create an instance of Die called d with sides = 4
+    d = Die(4)
+
+    # Prints 4
+    print("Sides of our dice = {}".format(d.sides))
+
+    print("\nCool, now let's roll our {}-sided die twice three times!".format(d.sides))
+    # Rolls our 4-sided die twice, 3 times!
+    for i in range(1, 4):
+        print("Two-Roll Results {}: {}".format(i, d.roll(2)))
+
+    # Error testing for bad inputs >:-( I told you you can't make a 'pokemon'-sided die!
+    m = Die('pokemon')
+
+    # Prints 6, get rekt
+    print("\nSides of our 'pokemon' dice = {}\nHaha >:-(".format(m.sides))
+
+    # Create a set of dice containing 5 8-sided die
+    myDice = Dice(5, 8)
+
+    print("\nOur new shiny set of dice:")
+    # Prints our set of dice
+    print(myDice)
+
+    print("\nLets roll each of the dice in our set once!")
+    # Roll each of our 5 dice 1 time
+    print("Our rolled dice totalled {} out of a possible {}".format(myDice.roll(),myDice.maxRoll()))
+
+    # 5 dice * 8 sides = 40 maximum pips...prints 40. I can do maths yay :-)
+    print("\nMaximum roll in our current set of dice: {}".format(myDice.maxRoll()))
+
+    # 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 = 36 / 8 = 4.5 avg per dice * 5 total dice = 22.5
+    print("Average roll of our current set of dice: {}".format(myDice.avgRoll()))
+
+    # Create a dice via a string
+    l = Dice('4.d.20')
+    print("\n{}".format(l))
