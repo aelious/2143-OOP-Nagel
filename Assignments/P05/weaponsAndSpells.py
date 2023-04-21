@@ -10,7 +10,9 @@ d6_2 = Dice(2, 6)
 d6_3 = Dice(3, 6)
 d8_1 = Dice(1, 8)
 d8_2 = Dice(2, 8)
+d8_3 = Dice(3, 8)
 d10_1 = Dice(1, 10)
+d10_2 = Dice(2, 10)
 
 availableSpells = {
     "DONT DO THIS TO ME": ["PLEASE", "DONT MAKE ME IMPLEMENT SPELLS"],
@@ -18,7 +20,12 @@ availableSpells = {
     "DAMAGE": ["damage", d8_1],
     "BUFF": ["buff"],
     "NERF": ["nerf"]
+}
 
+availableAttacks = {
+    "MASSIVE ATTACK WOW": ["maw", d10_2],
+    "HUGE DEATH CRUSH": ["hdc", d8_2],
+    "BIG WOMBO COMBO": ["bwc", d8_3]
 }
 
 availableWeapons = {
@@ -47,10 +54,4 @@ availableWeapons = {
     "Shortbow": [d6_1, "piercing", "ranged"],
     "Sling": [d4_1, "bludgeoning", "ranged"],
     "Longbow": [d8_1, "piercing", "ranged"]
-}
-
-availableAttacks = {
-    "PLEASEDONTMAKEMEDOTHIS": ["PLEASE", "DONT MAKE ME IMPLEMENT SPELLS"],
-    "HEAL": [d10_1, "healing"],
-    "DAMAGE": [d8_1, "damage"]
 }

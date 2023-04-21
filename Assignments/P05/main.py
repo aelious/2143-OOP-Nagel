@@ -1,14 +1,14 @@
 from character import Character
 from classes import *
 
-myChar = Character()
+myChar = Character("Default Char :-)")
 myChar.printStats()
 
-myBarb = Barbarian()
+myBarb = Barbarian("Punchyfists")
 myBarb.printStats()
 print(myBarb.primaryStats)
 
-myBard = Bard()
+myBard = Bard("Brad")
 print(myBard.primaryStats)
 
 mySB = Spellblade
@@ -28,3 +28,6 @@ myBard.printStats()
 myBard.attack("spell", "NERF")
 myBard.printStats()
 myBard.checkInventory()
+
+myBard.printCharacterSheet()
+myBarb.printCharacterSheet()

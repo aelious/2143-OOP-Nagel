@@ -7,9 +7,11 @@ class Character(object):
     d6_1 = Dice(1, 6)
     primaryStats = []
     equippableWeapons = []
+    description = ""
     
-    def __init__(self):
+    def __init__(self, n):
         self.Stats = {"STR":0, "DEX":0, "CON":0, "INT":0, "WIS":0, "CHA":0}
+        self.name = n
         self.rollStats(self.Stats)
         self.inventory = []
         self.equippedWeapon = ""
@@ -31,7 +33,7 @@ class Character(object):
         self.diceRolls.sort()
         # Remove lowest rolled value!
         self.diceRolls.pop(0)
-        # Return highest 3 rolled values!
+        # Return sum of highest 3 rolled values!
         return sum(self.diceRolls)
     
     def equipWeapon(self, weapon):
@@ -73,21 +75,29 @@ class Character(object):
                 print("BOOSTED {}: {}".format(k, self.Stats[k]))
 
     def buffStats(self):
-            for k in self.Stats:
-                self.Stats[k] *= 1.2
-                self.Stats[k] = floor(self.Stats[k])
+        for k in self.Stats:
+            self.Stats[k] *= 1.2
+            self.Stats[k] = floor(self.Stats[k])
 
     def nerfStats(self):
-            for k in self.Stats:
-                self.Stats[k] *= .8
-                self.Stats[k] = floor(self.Stats[k])
+        for k in self.Stats:
+            self.Stats[k] *= .8
+            self.Stats[k] = floor(self.Stats[k])
+
+    def printCharacterSheet(self):
+        print("~~~ {} ~~~\n===================".format(self.name))
+        print("Class:\n{}".format(self.__class__.__name__))
+        print("Story:\n{} is {}".format(self.name, self.description))
+        print("Stats:")
+        self.printStats()
+        print("Primary Stats: {}".format(self.primaryStats))
 
     
 
 class MagicUser(Character):
-    def __init__(self):
+    def __init__(self, n):
         self.spells = []
-        super().__init__()
+        super().__init__(n)
     
     def magicAttack(self, spell):
         if (spell in self.spells and spell in availableSpells):
@@ -115,9 +125,9 @@ class MagicUser(Character):
             self.spells.append(spell)
     
 class MeleeUser(Character):
-    def __init__(self):
+    def __init__(self, n):
         self.attacks = []
-        super().__init__()
+        super().__init__(n)
     
     def generateDamage(self, weapon):
         return availableWeapons[weapon][0].roll()
@@ -134,11 +144,12 @@ class MeleeUser(Character):
             print("You punch them for 1 damage... Maybe try equipping a weapon.")
 
 class MixedUser(MagicUser, MeleeUser):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, n):
+        super().__init__(n)
     
     def attack(self, type, spell = None):
         if (type == "attack"):
             super().meleeAttack()
         elif (type == "spell" and spell != None):
             super().magicAttack(spell)
+
