@@ -1,18 +1,18 @@
 from dice import Dice
 
+d1_1 = Dice(1, 1)
+d2_1 = Dice(2, 1)
+d3_1 = Dice(3, 1)
+d4_1 = Dice(1, 4)
+d4_2 = Dice(2, 4)
+d6_1 = Dice(1, 6)
+d6_2 = Dice(2, 6)
+d6_3 = Dice(3, 6)
+d8_1 = Dice(1, 8)
+d8_2 = Dice(2, 8)
+d10_1 = Dice(1, 10)
+
 class Weapons:
-    d1_1 = Dice(1, 1)
-    d2_1 = Dice(2, 1)
-    d3_1 = Dice(3, 1)
-    d4_1 = Dice(1, 4)
-    d4_2 = Dice(2, 4)
-    d6_1 = Dice(1, 6)
-    d6_2 = Dice(2, 6)
-    d6_3 = Dice(3, 6)
-    d8_1 = Dice(1, 8)
-    d8_2 = Dice(2, 8)
-    d10_1 = Dice(1, 10)
-    
     availableWeapons = {
         "Battleaxe": [d8_1, "slashing", "axe"],
         "Flail": [d8_1, "bludgeoning", "mace"],
@@ -43,3 +43,20 @@ class Weapons:
 
     def generateDamage(self, weapon):
         return self.availableWeapons[weapon][0].roll()
+    
+class Spells:
+    availableSpells = {
+        "DONT DO THIS TO ME": ["PLEASE", "DONT MAKE ME IMPLEMENT SPELLS"],
+        "HEAL": [d10_1, "healing"],
+        "DAMAGE": [d8_1, "damage"]
+    }
+    def castSpell(self, spell):
+        if(spell in self.availableSpells):
+            if(self.availableSpells[spell][1] == "healing"):
+                healing = self.availableSpells[spell][0].roll()
+                print("You healed {} hitpoints!".format(healing))
+            else:
+                damage = self.availableSpells[spell][0].roll()
+                print("You dealt {} damage!".format(1))
+        else:
+            print("That spell doesn't exist!")

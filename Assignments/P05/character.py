@@ -1,23 +1,23 @@
 from dice import Dice
 from math import floor
-from weapons import Weapons
+from weaponsAndSpells import *
 
 w = Weapons()
+s = Spells()
 
 class Character(object):
     d20_1 = Dice(1, 20)
     d6_1 = Dice(1, 6)
     primaryStats = []
     equippableWeapons = []
-    equippedWeapon = ""
     
-
     def __init__(self):
         self.Stats = {"STR":0, "DEX":0, "CON":0, "INT":0, "WIS":0, "CHA":0}
         self.rollStats(self.Stats)
         self.boostPrimaryStats()
         self.inventory = []
-        
+        self.equippedWeapon = ""
+
     def rollStats(self, statList):
         for k in self.Stats:
             statList[k] = self.generateStat()
@@ -50,6 +50,22 @@ class Character(object):
                     print("That weapon exists but your class can't equip it!")
             else:
                 print("That weapon doesn't exist!!...")
+    
+    def unequipWeapon(self):
+        if(len(self.equippedWeapon) == 0):
+            print("You don't have a weapon equipped!")
+        else:
+            self.inventory.append(self.equippedWeapon)
+            print("Removing {}.".format(self.equippedWeapon))
+            self.equippedWeapon = ""
+
+    def checkInventory(self):
+        if len(self.inventory) == 0:
+            print("You have nothing in your inventory!")
+            return
+        print("Inventory:\n==========")
+        for i in self.inventory:
+            print(i)
 
     def boostPrimaryStats(self):
         for k in self.Stats:
@@ -65,21 +81,25 @@ class MagicUser(Character):
         super().__init__()
     
     def attack(self, spell):
-        pass
+        if (spell in self.spells):
+            print("You cast {}!".format(spell))
+        else:
+            print("You don't know that spell...")
     
 class MeleeUser(Character):
     attacks = []
-    equippedWeapon = ""
-    
+
     def __init__(self):
         super().__init__()
     
     def attack(self):
-        if (type == "attack"):
-            damage = w.availableWeapons[self.equippedWeapon][0].roll()
-            print("You dealt {}!".format(damage))
+        if (len(self.equippedWeapon) != 0):
+            damage = w.generateDamage(self.equippedWeapon)
+            print("You dealt {} damage!".format(damage))
+        else:
+            print("You punch them for 1 damage... Maybe try equipping a weapon.")
 
-class MixedClass(Character):
+class MixedUser(Character):
     spells = []
     attacks = []
     def __init__(self):
@@ -93,6 +113,7 @@ class MixedClass(Character):
             print ("You need to tell me what you want to cast!")
         elif (type == "spell" and spell != None):
             if (spell in self.spells):
-                print("You cast {}!")
+                print("You cast {}!".format(spell))
+                s.castSpell(spell)
             else:
                 print("You don't know that spell...")

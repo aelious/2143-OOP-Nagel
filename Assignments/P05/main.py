@@ -1,6 +1,5 @@
 from character import Character
 from classes import *
-import json
 
 myChar = Character()
 myChar.printStats()
@@ -15,15 +14,14 @@ print(myBard.primaryStats)
 mySB = Spellblade
 
 myBarb.equipWeapon("Battleaxe")
+myBarb.equipWeapon("Crossbow")
+myBarb.unequipWeapon()
+myBarb.equipWeapon("Crossbow")
+myBarb.equipWeapon("Eye of Sauron")
+myBarb.equipWeapon("Greatsword")
+myBarb.checkInventory()
 
 
 
-""" o = open('weapons.txt', "a")
-f = open('weapons.json')
-data = json.load(f)
-for i in data:
-    dmgText = i["Damage"]
-    keepText = ""
-    if len(dmgText) != 0:
-        keepText += "d" + dmgText[2] + "_" + dmgText[0]
-    o.write('\t"{}": [{}, "{}"],\n'.format(i["Name"], keepText, i["Damage"][4:])) """
+myBard.attack("spell", "HEAL")
+myBard.checkInventory()
