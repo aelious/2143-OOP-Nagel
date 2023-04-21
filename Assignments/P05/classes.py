@@ -15,7 +15,6 @@ class Bard(MixedUser):
     description = "A performer with magical abilities who uses music and storytelling to inspire allies and hinder enemies."
     primaryStats = ["CHA", "INT"]
     equippableWeapons = ["mace"]
-    spells = ["HEAL"]
     def __init__(self):
         super().__init__()
 

@@ -2,9 +2,6 @@ from dice import Dice
 from math import floor
 from weaponsAndSpells import *
 
-w = Weapons()
-s = Spells()
-
 class Character(object):
     d20_1 = Dice(1, 20)
     d6_1 = Dice(1, 6)
@@ -14,13 +11,13 @@ class Character(object):
     def __init__(self):
         self.Stats = {"STR":0, "DEX":0, "CON":0, "INT":0, "WIS":0, "CHA":0}
         self.rollStats(self.Stats)
-        self.boostPrimaryStats()
         self.inventory = []
         self.equippedWeapon = ""
 
     def rollStats(self, statList):
         for k in self.Stats:
             statList[k] = self.generateStat()
+        self.boostPrimaryStats()
     
     def printStats(self):
         for k in self.Stats:
@@ -41,8 +38,8 @@ class Character(object):
         if (len(self.equippedWeapon) != 0):
             print("You already have a weapon equipped! Take it off first!")
         else:
-            if (weapon in w.availableWeapons.keys()):
-                typeOfWeap = w.availableWeapons[weapon][2]
+            if (weapon in availableWeapons.keys()):
+                typeOfWeap = availableWeapons[weapon][2]
                 if (typeOfWeap in self.equippableWeapons):
                     self.equippedWeapon = weapon
                     print("You equipped a {}!".format(weapon))
@@ -75,45 +72,73 @@ class Character(object):
                 self.Stats[k] = floor(self.Stats[k])
                 print("BOOSTED {}: {}".format(k, self.Stats[k]))
 
+    def buffStats(self):
+            for k in self.Stats:
+                self.Stats[k] *= 1.2
+                self.Stats[k] = floor(self.Stats[k])
+
+    def nerfStats(self):
+            for k in self.Stats:
+                self.Stats[k] *= .8
+                self.Stats[k] = floor(self.Stats[k])
+
+    
+
 class MagicUser(Character):
-    spells = []
     def __init__(self):
+        self.spells = []
         super().__init__()
     
-    def attack(self, spell):
-        if (spell in self.spells):
+    def magicAttack(self, spell):
+        if (spell in self.spells and spell in availableSpells):
             print("You cast {}!".format(spell))
+            self.castSpell(spell)
         else:
             print("You don't know that spell...")
+
+    def castSpell(self, spell):
+        if(availableSpells[spell][0] == "healing"):
+            healing = availableSpells[spell][1].roll()
+            print("You healed {} hitpoints!".format(healing))
+        elif(availableSpells[spell][0] == "damage"):
+            damage = availableSpells[spell][1].roll()
+            print("You dealt {} damage!".format(damage))
+        elif(availableSpells[spell][0] == "buff"):
+            self.buffStats()
+            print("BUFFED STATS, YOU'RE INSANE NOW! WOW")
+        elif(availableSpells[spell][0] == "nerf"):
+            self.nerfStats()
+            print("Yeah I guess I need to implement targeting... You nerfed yourself.")
+
+    def learnSpell(self, spell):
+        if(spell in availableSpells):
+            self.spells.append(spell)
     
 class MeleeUser(Character):
-    attacks = []
-
     def __init__(self):
+        self.attacks = []
         super().__init__()
     
-    def attack(self):
+    def generateDamage(self, weapon):
+        return availableWeapons[weapon][0].roll()
+    
+    def learnAttack(self, attack):
+        if(attack in availableAttacks and attack not in self.attacks):
+            self.attacks.append(attack)    
+
+    def meleeAttack(self):
         if (len(self.equippedWeapon) != 0):
-            damage = w.generateDamage(self.equippedWeapon)
+            damage = self.generateDamage(self.equippedWeapon)
             print("You dealt {} damage!".format(damage))
         else:
             print("You punch them for 1 damage... Maybe try equipping a weapon.")
 
-class MixedUser(Character):
-    spells = []
-    attacks = []
+class MixedUser(MagicUser, MeleeUser):
     def __init__(self):
         super().__init__()
-
+    
     def attack(self, type, spell = None):
         if (type == "attack"):
-            damage = w.availableWeapons[self.equippedWeapon][0].roll()
-            print("You dealt {}!".format(damage))
-        if (type == "spell" and spell == None):
-            print ("You need to tell me what you want to cast!")
+            super().meleeAttack()
         elif (type == "spell" and spell != None):
-            if (spell in self.spells):
-                print("You cast {}!".format(spell))
-                s.castSpell(spell)
-            else:
-                print("You don't know that spell...")
+            super().magicAttack(spell)

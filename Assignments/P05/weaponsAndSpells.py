@@ -12,51 +12,45 @@ d8_1 = Dice(1, 8)
 d8_2 = Dice(2, 8)
 d10_1 = Dice(1, 10)
 
-class Weapons:
-    availableWeapons = {
-        "Battleaxe": [d8_1, "slashing", "axe"],
-        "Flail": [d8_1, "bludgeoning", "mace"],
-        "Greataxe": [d10_1, "slashing", "axe"],
-        "Greatsword": [d6_2, "slashing", "sword"],
-        "Halberd": [d10_1, "slashing", "axe"],
-        "Longsword": [d8_1, "slashing/piercing", "sword"],
-        "Morningstar": [d8_1, "piercing/bludgeoning", "mace"],
-        "Rapier": [d8_1, "piercing", "sword"],
-        "Scimitar": [d6_1, "slashing", "sword"], 
-        "Shortsword": [d6_1, "piercing", "sword"],
-        "War Pick": [d8_1, "piercing", "mace"],
-        "Club": [d4_1, "bludgeoning", "mace"],
-        "Dagger": [d4_1, "piercing", "dagger"],
-        "Handaxe": [d6_1, "slashing", "axe"],
-        "Javelin": [d6_1, "piercing", "ranged"],
-        "Mace": [d6_1, "bludgeoning", "mace"],
-        "Sickle": [d4_1, "slashing", "sword"],
-        "Quarterstaff": [d6_1, "bludgeoning", "staff"],
-        "Staff": [d6_1, "bludgeoning", "staff"],
-        "Spear": [d4_1, "piercing", "ranged"],
-        "Crossbow": [d8_1, "piercing", "ranged"],
-        "Dart": [d4_1, "piercing", "ranged"],
-        "Shortbow": [d6_1, "piercing", "ranged"],
-        "Sling": [d4_1, "bludgeoning", "ranged"],
-        "Longbow": [d8_1, "piercing", "ranged"]
-    }
+availableSpells = {
+    "DONT DO THIS TO ME": ["PLEASE", "DONT MAKE ME IMPLEMENT SPELLS"],
+    "HEAL": ["healing", d10_1],
+    "DAMAGE": ["damage", d8_1],
+    "BUFF": ["buff"],
+    "NERF": ["nerf"]
 
-    def generateDamage(self, weapon):
-        return self.availableWeapons[weapon][0].roll()
-    
-class Spells:
-    availableSpells = {
-        "DONT DO THIS TO ME": ["PLEASE", "DONT MAKE ME IMPLEMENT SPELLS"],
-        "HEAL": [d10_1, "healing"],
-        "DAMAGE": [d8_1, "damage"]
-    }
-    def castSpell(self, spell):
-        if(spell in self.availableSpells):
-            if(self.availableSpells[spell][1] == "healing"):
-                healing = self.availableSpells[spell][0].roll()
-                print("You healed {} hitpoints!".format(healing))
-            else:
-                damage = self.availableSpells[spell][0].roll()
-                print("You dealt {} damage!".format(1))
-        else:
-            print("That spell doesn't exist!")
+}
+
+availableWeapons = {
+    "Battleaxe": [d8_1, "slashing", "axe"],
+    "Flail": [d8_1, "bludgeoning", "mace"],
+    "Greataxe": [d10_1, "slashing", "axe"],
+    "Greatsword": [d6_2, "slashing", "sword"],
+    "Halberd": [d10_1, "slashing", "axe"],
+    "Longsword": [d8_1, "slashing/piercing", "sword"],
+    "Morningstar": [d8_1, "piercing/bludgeoning", "mace"],
+    "Rapier": [d8_1, "piercing", "sword"],
+    "Scimitar": [d6_1, "slashing", "sword"], 
+    "Shortsword": [d6_1, "piercing", "sword"],
+    "War Pick": [d8_1, "piercing", "mace"],
+    "Club": [d4_1, "bludgeoning", "mace"],
+    "Dagger": [d4_1, "piercing", "dagger"],
+    "Handaxe": [d6_1, "slashing", "axe"],
+    "Javelin": [d6_1, "piercing", "ranged"],
+    "Mace": [d6_1, "bludgeoning", "mace"],
+    "Sickle": [d4_1, "slashing", "sword"],
+    "Quarterstaff": [d6_1, "bludgeoning", "staff"],
+    "Staff": [d6_1, "bludgeoning", "staff"],
+    "Spear": [d4_1, "piercing", "ranged"],
+    "Crossbow": [d8_1, "piercing", "ranged"],
+    "Dart": [d4_1, "piercing", "ranged"],
+    "Shortbow": [d6_1, "piercing", "ranged"],
+    "Sling": [d4_1, "bludgeoning", "ranged"],
+    "Longbow": [d8_1, "piercing", "ranged"]
+}
+
+availableAttacks = {
+    "PLEASEDONTMAKEMEDOTHIS": ["PLEASE", "DONT MAKE ME IMPLEMENT SPELLS"],
+    "HEAL": [d10_1, "healing"],
+    "DAMAGE": [d8_1, "damage"]
+}

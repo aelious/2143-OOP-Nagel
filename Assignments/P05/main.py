@@ -21,7 +21,10 @@ myBarb.equipWeapon("Eye of Sauron")
 myBarb.equipWeapon("Greatsword")
 myBarb.checkInventory()
 
-
-
+myBard.learnSpell("HEAL")
 myBard.attack("spell", "HEAL")
+myBard.learnSpell("NERF")
+myBard.printStats()
+myBard.attack("spell", "NERF")
+myBard.printStats()
 myBard.checkInventory()
