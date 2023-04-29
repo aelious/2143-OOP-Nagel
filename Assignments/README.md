@@ -6,4 +6,5 @@
 | 4 | [P02](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/P02) | Program 2 - Extend vector class functionality and overload C++ operators. |
 | 5 | [P03](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/P03) | Program 3 - Implement a class that generates graphviz graphics to visualize different data structures. |
 | 6 | [P04](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/P04) | Program 4 - Implement Die and Dice classes in Python. |
-| 7 | [A05](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/A05) | Assignment 5 - Create a UML design to outline a D&D style game. |
+| 7 | [P05](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/P05) | Program 5 - Implement D&D Game using D&D classes, weapons, and spells. |
+| 8 | [A05](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/A05) | Assignment 5 - Create a UML design to outline a D&D style game. |
