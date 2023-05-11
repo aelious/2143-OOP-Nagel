@@ -8,3 +8,6 @@
 | 6 | [P04](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/P04) | Program 4 - Implement Die and Dice classes in Python. |
 | 7 | [P05](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/P05) | Program 5 - Implement D&D Game using D&D classes, weapons, and spells. |
 | 8 | [A05](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/A05) | Assignment 5 - Create a UML design to outline a D&D style game. |
+
+| 7 | [P05](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/P05) | Program 5 - Implement D&D Game using D&D classes, weapons, and spells. |
+| 8 | [A05](https://github.com/aelious/2143-OOP-Nagel/tree/main/Assignments/A05) | Assignment 5 - Create a UML design to outline a D&D style game. |
